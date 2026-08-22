@@ -1,399 +1,1494 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Sanho&Designers</title>
-
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            background: #f5f5f2;
-            color: #202020;
-            font-family:
-                -apple-system,
-                BlinkMacSystemFont,
-                "Segoe UI",
-                "Noto Sans KR",
-                sans-serif;
-        }
-
-        .container {
-            width: min(920px, calc(100% - 32px));
-            margin: 0 auto;
-        }
-
-
-        /* =================================
-           HEADER
-        ================================= */
-
-        header {
-            padding: 28px 0 10px;
-        }
-
-        .logo {
-            font-size: 20px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-        }
-
-        .logo span {
-            font-weight: 400;
-        }
-
-
-        /* =================================
-           TODAY
-        ================================= */
-
-        .today {
-            padding: 55px 0 38px;
-        }
-
-        .today-label {
-            font-size: 12px;
-            color: #999;
-            letter-spacing: 2px;
-            margin-bottom: 12px;
-        }
-
-        .date {
-            font-size: clamp(38px, 8vw, 68px);
-            font-weight: 700;
-            letter-spacing: -3px;
-            line-height: 1.05;
-        }
-
-        .weekday {
-            margin-top: 10px;
-            font-size: 18px;
-            color: #777;
-        }
-
-
-        /* =================================
-           SECTION TITLE
-        ================================= */
-
-        .section-title {
-            font-size: 13px;
-            color: #999;
-            letter-spacing: 1.5px;
-            margin-bottom: 15px;
-        }
-
-
-        /* =================================
-           POOL CARD
-        ================================= */
-
-        .pool-card {
-            background: white;
-            border: 1px solid #e6e6e2;
-            border-radius: 24px;
-            padding: 28px;
-            margin-bottom: 18px;
-        }
-
-        .pool-number {
-            font-size: 11px;
-            color: #aaa;
-            letter-spacing: 2px;
-            margin-bottom: 17px;
-        }
-
-        .pool-name {
-            font-size: clamp(27px, 5vw, 40px);
-            font-weight: 700;
-            letter-spacing: -1.5px;
-            margin-bottom: 7px;
-        }
-
-        .address {
-            font-size: 14px;
-            color: #888;
-            margin-bottom: 30px;
-        }
-
-
-        /* =================================
-           TODAY SCHEDULE
-        ================================= */
-
-        .schedule-label {
-            font-size: 13px;
-            color: #888;
-            margin-bottom: 12px;
-        }
-
-        .times {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 9px;
-        }
-
-        .time {
-            background: #f1f1ed;
-            border-radius: 13px;
-            padding: 14px 18px;
-            font-size: 20px;
-            font-weight: 600;
-            letter-spacing: -0.5px;
-        }
-
-        .closed {
-            background: #eeeeeb;
-            color: #999;
-            font-weight: 500;
-        }
-
-
-        /* =================================
-           BUTTONS
-        ================================= */
-
-        .buttons {
-            display: flex;
-            gap: 9px;
-            margin-top: 25px;
-            flex-wrap: wrap;
-        }
-
-        .button {
-            display: inline-block;
-            text-decoration: none;
-            color: #333;
-            background: #f1f1ed;
-            padding: 11px 15px;
-            border-radius: 11px;
-            font-size: 13px;
-        }
-
-        .button:hover {
-            background: #e5e5df;
-        }
-
-
-        /* =================================
-           NOTICE
-        ================================= */
-
-        .notice {
-            margin-top: 20px;
-            padding-top: 18px;
-            border-top: 1px solid #eeeeea;
-            color: #999;
-            font-size: 12px;
-            line-height: 1.7;
-        }
-
-
-        /* =================================
-           COLLAPSIBLE WEEKLY SCHEDULE
-        ================================= */
-
-        .weekly {
-            margin-top: 25px;
-        }
-
-        .weekly-toggle {
-            width: 100%;
-            border: none;
-            background: #f5f5f2;
-            border-radius: 12px;
-            padding: 13px 15px;
-
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-
-            cursor: pointer;
-
-            color: #777;
-            font-size: 13px;
-            text-align: left;
-        }
-
-        .weekly-toggle:hover {
-            background: #eeeeea;
-        }
-
-        .weekly-arrow {
-            font-size: 14px;
-            transition: transform 0.2s ease;
-        }
-
-        .weekly-toggle.open .weekly-arrow {
-            transform: rotate(180deg);
-        }
-
-        .weekly-content {
-            display: none;
-            margin-top: 10px;
-        }
-
-        .weekly-content.open {
-            display: block;
-        }
-
-
-        /* =================================
-           WEEKLY SCHEDULE
-        ================================= */
-
-        .week {
-            background: white;
-            border: 1px solid #e6e6e2;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .day {
-            display: grid;
-            grid-template-columns: 65px 1fr;
-            padding: 17px 20px;
-            border-bottom: 1px solid #eeeeea;
-        }
-
-        .day:last-child {
-            border-bottom: none;
-        }
-
-        .day-name {
-            font-weight: 600;
-        }
-
-        .day-time {
-            color: #666;
-            line-height: 1.7;
-        }
-
-        .today-row {
-            background: #f3f3ef;
-        }
-
-        .today-row .day-name {
-            font-weight: 700;
-        }
-
-
-        /* =================================
-           FOOTER
-        ================================= */
-
-        footer {
-            padding: 70px 0 35px;
-            color: #aaa;
-            font-size: 12px;
-            line-height: 1.7;
-        }
-
-
-        /* =================================
-           MOBILE
-        ================================= */
-
-        @media (max-width: 600px) {
-
-            .container {
-                width: calc(100% - 28px);
-            }
-
-            .today {
-                padding-top: 40px;
-            }
-
-            .pool-card {
-                padding: 23px;
-                border-radius: 20px;
-            }
-
-            .time {
-                width: 100%;
-                text-align: center;
-            }
-
-            .day {
-                grid-template-columns: 50px 1fr;
-                padding: 16px;
-                font-size: 14px;
-            }
-
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Sanho&Designers</title>
+
+<style>
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #f5f5f2;
+    color: #202020;
+
+    font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        "Noto Sans KR",
+        sans-serif;
+}
+
+.container {
+    width: min(920px, calc(100% - 32px));
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+header {
+    padding: 28px 0 10px;
+}
+
+.logo {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.logo span {
+    font-weight: 400;
+}
+
+
+/* =========================================================
+   TODAY
+========================================================= */
+
+.today {
+    padding: 55px 0 38px;
+}
+
+.today-label {
+    font-size: 12px;
+    color: #999;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+}
+
+.date {
+    font-size: clamp(38px, 8vw, 68px);
+    font-weight: 700;
+    letter-spacing: -3px;
+    line-height: 1.05;
+}
+
+.weekday {
+    margin-top: 10px;
+    font-size: 18px;
+    color: #777;
+}
+
+
+/* =========================================================
+   CATEGORY
+========================================================= */
+
+.category {
+    margin-bottom: 14px;
+}
+
+.category-toggle {
+    width: 100%;
+
+    border: 1px solid #e5e5e1;
+    background: white;
+
+    border-radius: 18px;
+
+    padding: 20px 22px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    color: #202020;
+
+    font-family: inherit;
+    text-align: left;
+
+    transition:
+        background 0.2s ease,
+        border-radius 0.2s ease;
+}
+
+.category-toggle:hover {
+    background: #fafaf8;
+}
+
+.category-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.category-icon {
+    font-size: 22px;
+}
+
+.category-name {
+    font-size: 19px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.category-arrow {
+    font-size: 14px;
+    color: #999;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.category-toggle.open {
+    border-radius: 18px 18px 0 0;
+    border-bottom-color: transparent;
+}
+
+.category-toggle.open .category-arrow {
+    transform: rotate(180deg);
+}
+
+
+/* =========================================================
+   CATEGORY CONTENT
+========================================================= */
+
+.category-content {
+    display: none;
+
+    background: white;
+
+    border: 1px solid #e5e5e1;
+    border-top: none;
+
+    border-radius: 0 0 18px 18px;
+
+    padding: 0 14px 14px;
+}
+
+.category-content.open {
+    display: block;
+}
+
+
+/* =========================================================
+   SWIMMING POOL CARD
+========================================================= */
+
+.pool-card {
+    background: #fafaf8;
+
+    border: 1px solid #e8e8e4;
+
+    border-radius: 18px;
+
+    padding: 24px;
+
+    margin-top: 10px;
+}
+
+.pool-number {
+    font-size: 11px;
+
+    color: #aaa;
+
+    letter-spacing: 2px;
+
+    margin-bottom: 15px;
+}
+
+.pool-name {
+    font-size: clamp(25px, 5vw, 36px);
+
+    font-weight: 700;
+
+    letter-spacing: -1.5px;
+
+    margin-bottom: 7px;
+}
+
+.address {
+    font-size: 13px;
+
+    color: #888;
+
+    margin-bottom: 26px;
+}
+
+
+/* =========================================================
+   TODAY SCHEDULE
+========================================================= */
+
+.schedule-label {
+    font-size: 13px;
+
+    color: #888;
+
+    margin-bottom: 11px;
+}
+
+.times {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+}
+
+.time {
+    background: #eeeeea;
+
+    border-radius: 12px;
+
+    padding: 13px 16px;
+
+    font-size: 18px;
+
+    font-weight: 600;
+
+    letter-spacing: -0.4px;
+}
+
+.closed {
+    color: #999;
+
+    font-weight: 500;
+}
+
+
+/* =========================================================
+   BUTTONS
+========================================================= */
+
+.buttons {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 22px;
+
+    flex-wrap: wrap;
+}
+
+.button {
+    display: inline-block;
+
+    text-decoration: none;
+
+    color: #333;
+
+    background: #eeeeea;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+}
+
+.button:hover {
+    background: #e3e3de;
+}
+
+
+/* =========================================================
+   NOTICE
+========================================================= */
+
+.notice {
+    margin-top: 18px;
+
+    padding-top: 16px;
+
+    border-top: 1px solid #e7e7e3;
+
+    color: #999;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   WEEKLY SCHEDULE
+========================================================= */
+
+.weekly {
+    margin-top: 22px;
+}
+
+.weekly-toggle {
+    width: 100%;
+
+    border: none;
+
+    background: #eeeeea;
+
+    border-radius: 11px;
+
+    padding: 12px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    color: #777;
+
+    font-size: 12px;
+
+    font-family: inherit;
+
+    text-align: left;
+}
+
+.weekly-toggle:hover {
+    background: #e7e7e2;
+}
+
+.weekly-arrow {
+    transition:
+        transform 0.2s ease;
+}
+
+.weekly-toggle.open .weekly-arrow {
+    transform: rotate(180deg);
+}
+
+.weekly-content {
+    display: none;
+
+    margin-top: 8px;
+}
+
+.weekly-content.open {
+    display: block;
+}
+
+.week {
+    background: white;
+
+    border: 1px solid #e6e6e2;
+
+    border-radius: 15px;
+
+    overflow: hidden;
+}
+
+.day {
+    display: grid;
+
+    grid-template-columns: 50px 1fr;
+
+    padding: 14px 16px;
+
+    border-bottom: 1px solid #eeeeea;
+
+    font-size: 13px;
+}
+
+.day:last-child {
+    border-bottom: none;
+}
+
+.day-name {
+    font-weight: 600;
+}
+
+.day-time {
+    color: #666;
+
+    line-height: 1.7;
+}
+
+.today-row {
+    background: #f3f3ef;
+}
+
+
+/* =========================================================
+   ECONOMY
+========================================================= */
+
+.economy-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+
+/* =========================================================
+   ECONOMY CARD
+========================================================= */
+
+.economy-card {
+    background: #fafaf8;
+
+    border: 1px solid #e8e8e4;
+
+    border-radius: 18px;
+
+    padding: 22px;
+}
+
+.economy-category {
+    font-size: 12px;
+
+    color: #999;
+
+    margin-bottom: 5px;
+}
+
+.economy-name {
+    font-size: 22px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.8px;
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+.economy-price {
+    display: flex;
+
+    align-items: center;
+
+    gap: 7px;
+
+    margin-top: 17px;
+}
+
+.price-number {
+    font-size: 27px;
+
+    font-weight: 700;
+
+    letter-spacing: -1.2px;
+}
+
+.price-dot {
+    width: 8px;
+
+    height: 8px;
+
+    border-radius: 50%;
+
+    display: inline-block;
+}
+
+.price-dot.green {
+    background: #62b96b;
+}
+
+.price-dot.yellow {
+    background: #e6c94f;
+}
+
+.price-dot.blue {
+    background: #5d9bd3;
+}
+
+.price-dot.red {
+    background: #df6a65;
+}
+
+
+/* =========================================================
+   MONEY GAUGE
+========================================================= */
+
+.money-gauge {
+    margin-top: 10px;
+
+    width: 180px;
+}
+
+.gauge-small {
+    width: 180px;
+
+    height: 6px;
+
+    border-radius: 999px;
+
+    background: #e8e8e4;
+
+    overflow: hidden;
+}
+
+.gauge-fill {
+    height: 100%;
+
+    border-radius: 999px;
+}
+
+
+/* =========================================================
+   GAUGE COLORS
+========================================================= */
+
+.gauge-fill.green {
+    background: #62b96b;
+}
+
+.gauge-fill.yellow {
+    background: #e6c94f;
+}
+
+.gauge-fill.blue {
+    background: #5d9bd3;
+}
+
+.gauge-fill.red {
+    background: #df6a65;
+}
+
+
+/* =========================================================
+   GAUGE SCALE
+========================================================= */
+
+.gauge-scale {
+    width: 180px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 4px;
+
+    font-size: 9px;
+
+    color: #aaa;
+}
+
+
+/* =========================================================
+   ECONOMY INFO
+========================================================= */
+
+.economy-info {
+    display: flex;
+
+    flex-wrap: wrap;
+
+    gap: 8px;
+
+    margin-top: 15px;
+}
+
+.info-item {
+    background: white;
+
+    border: 1px solid #e7e7e3;
+
+    border-radius: 10px;
+
+    padding: 8px 11px;
+
+    font-size: 12px;
+
+    color: #666;
+}
+
+.info-value {
+    font-weight: 700;
+
+    color: #222;
+}
+
+.utility-positive {
+    color: #3e9a54;
+
+    font-weight: 700;
+}
+
+.utility-negative {
+    color: #c85a55;
+
+    font-weight: 700;
+}
+
+
+/* =========================================================
+   EXAM INFORMATION
+========================================================= */
+
+.exam-list {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 10px;
+
+    margin-top: 10px;
+}
+
+.exam-card {
+    background: #fafaf8;
+
+    border: 1px solid #e8e8e4;
+
+    border-radius: 18px;
+
+    padding: 22px;
+}
+
+.exam-label {
+    font-size: 12px;
+
+    color: #999;
+
+    margin-bottom: 6px;
+}
+
+.exam-name {
+    font-size: 22px;
+
+    font-weight: 700;
+
+    letter-spacing: -0.8px;
+
+    margin-bottom: 5px;
+}
+
+.exam-type {
+    font-size: 12px;
+
+    color: #777;
+
+    margin-bottom: 20px;
+}
+
+.exam-info {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 0;
+
+    border-top: 1px solid #e7e7e3;
+}
+
+.exam-row {
+    display: grid;
+
+    grid-template-columns: 100px 1fr;
+
+    gap: 10px;
+
+    padding: 12px 0;
+
+    border-bottom: 1px solid #eeeeea;
+
+    font-size: 13px;
+
+    line-height: 1.5;
+}
+
+.exam-row:last-child {
+    border-bottom: none;
+}
+
+.exam-key {
+    color: #999;
+}
+
+.exam-value {
+    color: #333;
+
+    font-weight: 500;
+}
+
+.exam-date {
+    font-weight: 700;
+
+    color: #222;
+}
+
+.exam-button {
+    display: inline-block;
+
+    margin-top: 18px;
+
+    text-decoration: none;
+
+    background: #eeeeea;
+
+    color: #444;
+
+    padding: 10px 14px;
+
+    border-radius: 10px;
+
+    font-size: 12px;
+}
+
+.exam-button:hover {
+    background: #e3e3de;
+}
+
+.exam-note {
+    margin-top: 12px;
+
+    color: #999;
+
+    font-size: 11px;
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+    padding: 70px 0 35px;
+
+    color: #aaa;
+
+    font-size: 12px;
+
+    line-height: 1.7;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .container {
+        width: calc(100% - 28px);
+    }
+
+    .today {
+        padding-top: 40px;
+    }
+
+    .category-toggle {
+        padding: 18px;
+    }
+
+    .category-name {
+        font-size: 18px;
+    }
+
+    .category-content {
+        padding: 0 9px 9px;
+    }
+
+    .pool-card {
+        padding: 21px;
+    }
+
+    .time {
+        width: 100%;
+        text-align: center;
+    }
+
+    .day {
+        grid-template-columns: 45px 1fr;
+
+        padding: 14px;
+    }
+
+    .economy-card {
+        padding: 19px;
+    }
+
+    .price-number {
+        font-size: 25px;
+    }
+
+    .money-gauge {
+        width: 160px;
+    }
+
+    .gauge-small {
+        width: 160px;
+    }
+
+    .gauge-scale {
+        width: 160px;
+    }
+
+    .exam-card {
+        padding: 19px;
+    }
+
+    .exam-row {
+        grid-template-columns: 85px 1fr;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+
+    .money-gauge {
+        width: 150px;
+    }
+
+    .gauge-small {
+        width: 150px;
+    }
+
+    .gauge-scale {
+        width: 150px;
+    }
+
+}
+
+</style>
 </head>
 
 
 <body>
 
+
 <div class="container">
 
 
-    <!-- =================================
-         HEADER
-    ================================= -->
+<!-- =======================================================
+     HEADER
+======================================================= -->
 
-    <header>
+<header>
 
-        <div class="logo">
-            Sanho<span>&</span>Designers
-        </div>
-
-    </header>
-
-
-    <!-- =================================
-         TODAY
-    ================================= -->
-
-    <section class="today">
-
-        <div class="today-label">
-            TODAY
-        </div>
-
-        <div class="date" id="date">
-            -
-        </div>
-
-        <div class="weekday" id="weekday">
-            -
-        </div>
-
-    </section>
-
-
-    <!-- =================================
-         SWIMMING
-    ================================= -->
-
-    <div class="section-title">
-        SWIMMING TODAY
+    <div class="logo">
+        Sanho<span>&</span>Designers
     </div>
 
-    <div id="poolContainer">
-        <!-- JavaScript가 수영장 카드를 자동으로 생성 -->
+</header>
+
+
+
+<!-- =======================================================
+     TODAY
+======================================================= -->
+
+<section class="today">
+
+    <div class="today-label">
+        TODAY
     </div>
 
+    <div
+        class="date"
+        id="date"
+    >
+        -
+    </div>
 
-    <!-- =================================
-         FOOTER
-    ================================= -->
+    <div
+        class="weekday"
+        id="weekday"
+    >
+        -
+    </div>
 
-    <footer>
+</section>
 
-        Sanho&Designers
-        <br>
 
-        designed together.
 
-    </footer>
+<!-- =======================================================
+     SWIMMING
+======================================================= -->
+
+<section class="category">
+
+    <button
+        class="category-toggle"
+        onclick="toggleCategory(this)"
+    >
+
+        <div class="category-left">
+
+            <span class="category-icon">
+                🏊
+            </span>
+
+            <span class="category-name">
+                수영
+            </span>
+
+        </div>
+
+        <span class="category-arrow">
+            ▼
+        </span>
+
+    </button>
+
+
+    <div class="category-content">
+
+        <div id="poolContainer"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     ECONOMY
+======================================================= -->
+
+<section class="category">
+
+    <button
+        class="category-toggle"
+        onclick="toggleCategory(this)"
+    >
+
+        <div class="category-left">
+
+            <span class="category-icon">
+                💰
+            </span>
+
+            <span class="category-name">
+                경제생활
+            </span>
+
+        </div>
+
+        <span class="category-arrow">
+            ▼
+        </span>
+
+    </button>
+
+
+    <div class="category-content">
+
+
+        <div class="economy-list">
+
+
+            <!-- =================================================
+                 VIPS
+            ================================================== -->
+
+            <article class="economy-card">
+
+                <div class="economy-category">
+                    외식
+                </div>
+
+                <div class="economy-name">
+                    VIPS
+                </div>
+
+
+                <div class="economy-price">
+
+                    <span class="price-number">
+                        47,900원
+                    </span>
+
+                    <span class="price-dot yellow"></span>
+
+                </div>
+
+
+                <div class="money-gauge">
+
+                    <div class="gauge-small">
+
+                        <div
+                            class="gauge-fill yellow"
+                            style="width:42.1%;"
+                        ></div>
+
+                    </div>
+
+                    <div class="gauge-scale">
+
+                        <span>
+                            1만원
+                        </span>
+
+                        <span>
+                            10만원
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="economy-info">
+
+                    <div class="info-item">
+                        할인
+                        <span class="info-value">
+                            50%
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        효용
+                        <span class="utility-positive">
+                            +5
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        아쉬움
+                        <span class="utility-negative">
+                            -2
+                        </span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 회현 스포츠센터
+            ================================================== -->
+
+            <article class="economy-card">
+
+                <div class="economy-category">
+                    수영
+                </div>
+
+                <div class="economy-name">
+                    회현 스포츠센터
+                </div>
+
+
+                <div class="economy-price">
+
+                    <span class="price-number">
+                        12,000원
+                    </span>
+
+                    <span class="price-dot yellow"></span>
+
+                </div>
+
+
+                <div class="money-gauge">
+
+                    <div class="gauge-small">
+
+                        <div
+                            class="gauge-fill yellow"
+                            style="width:2.2%;"
+                        ></div>
+
+                    </div>
+
+                    <div class="gauge-scale">
+
+                        <span>
+                            1만원
+                        </span>
+
+                        <span>
+                            10만원
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="economy-info">
+
+                    <div class="info-item">
+                        할인
+                        <span class="info-value">
+                            0%
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        효용
+                        <span class="utility-positive">
+                            +5
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        아쉬움
+                        <span class="utility-positive">
+                            0
+                        </span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 LOTTO
+            ================================================== -->
+
+            <article class="economy-card">
+
+                <div class="economy-category">
+                    복권
+                </div>
+
+                <div class="economy-name">
+                    로또
+                </div>
+
+
+                <div class="economy-price">
+
+                    <span class="price-number">
+                        10,000원
+                    </span>
+
+                    <span class="price-dot green"></span>
+
+                </div>
+
+
+                <div class="money-gauge">
+
+                    <div class="gauge-small">
+
+                        <div
+                            class="gauge-fill green"
+                            style="width:100%;"
+                        ></div>
+
+                    </div>
+
+                    <div class="gauge-scale">
+
+                        <span>
+                            0원
+                        </span>
+
+                        <span>
+                            1만원
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="economy-info">
+
+                    <div class="info-item">
+                        할인
+                        <span class="info-value">
+                            0%
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        효용
+                        <span class="utility-positive">
+                            +3
+                        </span>
+                    </div>
+
+                    <div class="info-item">
+                        아쉬움
+                        <span class="utility-negative">
+                            -2
+                        </span>
+                    </div>
+
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     EXAM INFORMATION
+======================================================= -->
+
+<section class="category">
+
+    <button
+        class="category-toggle"
+        onclick="toggleCategory(this)"
+    >
+
+        <div class="category-left">
+
+            <span class="category-icon">
+                📝
+            </span>
+
+            <span class="category-name">
+                시험정보
+            </span>
+
+        </div>
+
+        <span class="category-arrow">
+            ▼
+        </span>
+
+    </button>
+
+
+    <div class="category-content">
+
+        <div class="exam-list">
+
+
+            <!-- =================================================
+                 제80회
+            ================================================== -->
+
+            <article class="exam-card">
+
+                <div class="exam-label">
+                    한국사능력검정시험
+                </div>
+
+                <div class="exam-name">
+                    제80회
+                </div>
+
+                <div class="exam-type">
+                    심화만 시행
+                </div>
+
+
+                <div class="exam-info">
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            원서접수
+                        </div>
+
+                        <div class="exam-value">
+                            9월 15일(화) 10:00
+                            <br>
+                            ~ 9월 22일(화) 17:00
+                        </div>
+
+                    </div>
+
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            취소좌석
+                        </div>
+
+                        <div class="exam-value">
+                            9월 29일(화) 10:00
+                            <br>
+                            ~ 10월 2일(금) 17:00
+                        </div>
+
+                    </div>
+
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            시험일
+                        </div>
+
+                        <div class="exam-value exam-date">
+                            10월 17일(토)
+                        </div>
+
+                    </div>
+
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            합격자발표
+                        </div>
+
+                        <div class="exam-value">
+                            10월 30일(금)
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    class="exam-button"
+                    href="https://www.historyexam.go.kr/pageLink.do?link=examSchedule"
+                    target="_blank"
+                >
+                    공식 시험일정 ↗
+                </a>
+
+
+                <div class="exam-note">
+                    ※ 취소좌석 접수는 접수 잔여석에 한합니다.
+                </div>
+
+            </article>
+
+
+
+            <!-- =================================================
+                 제81회
+            ================================================== -->
+
+            <article class="exam-card">
+
+                <div class="exam-label">
+                    한국사능력검정시험
+                </div>
+
+                <div class="exam-name">
+                    제81회
+                </div>
+
+                <div class="exam-type">
+                    심화만 시행
+                </div>
+
+
+                <div class="exam-info">
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            원서접수
+                        </div>
+
+                        <div class="exam-value">
+                            11월 3일(화) 10:00
+                            <br>
+                            ~ 11월 10일(화) 17:00
+                        </div>
+
+                    </div>
+
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            취소좌석
+                        </div>
+
+                        <div class="exam-value">
+                            11월 11일(수) 13:00
+                            <br>
+                            ~ 11월 13일(금) 17:00
+                        </div>
+
+                    </div>
+
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            시험일
+                        </div>
+
+                        <div class="exam-value exam-date">
+                            11월 28일(토)
+                        </div>
+
+                    </div>
+
+
+                    <div class="exam-row">
+
+                        <div class="exam-key">
+                            합격자발표
+                        </div>
+
+                        <div class="exam-value">
+                            12월 11일(금)
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <a
+                    class="exam-button"
+                    href="https://www.historyexam.go.kr/pageLink.do?link=examSchedule"
+                    target="_blank"
+                >
+                    공식 시험일정 ↗
+                </a>
+
+
+                <div class="exam-note">
+                    ※ 취소좌석 접수는 접수 잔여석에 한합니다.
+                </div>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     FOOTER
+======================================================= -->
+
+<footer>
+
+    Sanho&Designers
+
+    <br>
+
+    designed together.
+
+</footer>
 
 
 </div>
@@ -403,19 +1498,26 @@
 <script>
 
 /* =========================================================
-   기본 날짜 정보
+   DATE
 ========================================================= */
 
 const today = new Date();
 
-const year = today.getFullYear();
-const month = today.getMonth() + 1;
-const date = today.getDate();
+const year =
+    today.getFullYear();
 
-const day = today.getDay();
+const month =
+    today.getMonth() + 1;
+
+const date =
+    today.getDate();
+
+const day =
+    today.getDay();
 
 
 const weekdays = [
+
     "일요일",
     "월요일",
     "화요일",
@@ -423,20 +1525,23 @@ const weekdays = [
     "목요일",
     "금요일",
     "토요일"
+
 ];
 
 
 document.getElementById("date").textContent =
+
     `${year}. ${String(month).padStart(2, "0")}. ${String(date).padStart(2, "0")}`;
 
 
 document.getElementById("weekday").textContent =
+
     weekdays[day];
 
 
 
 /* =========================================================
-   2026년 공휴일
+   HOLIDAYS
 ========================================================= */
 
 const holidays2026 = [
@@ -472,40 +1577,46 @@ const holidays2026 = [
 
 
 /* =========================================================
-   날짜 문자열
+   DATE STRING
 ========================================================= */
 
 function getDateString(dateObject) {
 
-    const y = dateObject.getFullYear();
+    const y =
+        dateObject.getFullYear();
 
     const m =
-        String(dateObject.getMonth() + 1).padStart(2, "0");
+        String(
+            dateObject.getMonth() + 1
+        ).padStart(2, "0");
 
     const d =
-        String(dateObject.getDate()).padStart(2, "0");
+        String(
+            dateObject.getDate()
+        ).padStart(2, "0");
 
     return `${y}-${m}-${d}`;
+
 }
 
 
 
 /* =========================================================
-   공휴일 여부
+   HOLIDAY CHECK
 ========================================================= */
 
 function isHoliday(dateObject) {
 
-    const dateString =
-        getDateString(dateObject);
+    return holidays2026.includes(
+        getDateString(dateObject)
+    );
 
-    return holidays2026.includes(dateString);
 }
 
 
 
 /* =========================================================
-   해당 일요일이 몇 번째 일요일인지 계산
+   SUNDAY WEEK NUMBER
 ========================================================= */
 
 function getSundayWeekNumber(dateObject) {
@@ -519,17 +1630,23 @@ function getSundayWeekNumber(dateObject) {
 
 
 /* =========================================================
-   2·4주차 일요일 여부
+   2ND / 4TH SUNDAY
 ========================================================= */
 
 function isSecondOrFourthSunday(dateObject) {
 
-    if (dateObject.getDay() !== 0) {
+    if (
+        dateObject.getDay() !== 0
+    ) {
+
         return false;
+
     }
+
 
     const weekNumber =
         getSundayWeekNumber(dateObject);
+
 
     return (
         weekNumber === 2 ||
@@ -541,57 +1658,82 @@ function isSecondOrFourthSunday(dateObject) {
 
 
 /* =========================================================
-   특별 휴관 조건
+   CLOSURE
 ========================================================= */
 
-function isSpecialClosure(pool, dateObject) {
+function isSpecialClosure(
+    pool,
+    dateObject
+) {
 
     if (
+
         pool.closedEverySunday &&
+
         dateObject.getDay() === 0
+
     ) {
+
         return true;
+
     }
 
 
     if (
+
         pool.closedSecondFourthSunday &&
-        isSecondOrFourthSunday(dateObject)
+
+        isSecondOrFourthSunday(
+            dateObject
+        )
+
     ) {
+
         return true;
+
     }
 
 
     if (
+
         pool.closedOnHoliday &&
+
         isHoliday(dateObject)
+
     ) {
+
         return true;
+
     }
 
 
     return false;
+
 }
 
 
 
 /* =========================================================
-   수영장 데이터
+   POOL DATA
 ========================================================= */
 
 const pools = [
 
 
-    /* =====================================================
-       01. 월계구민체육센터
-    ===================================================== */
+    /* =============================================
+       월계구민체육센터
+    ============================================= */
 
     {
-        name: "월계구민체육센터",
 
-        number: "SWIMMING POOL 01",
+        name:
+            "월계구민체육센터",
 
-        address: "서울특별시 노원구 월계로 298",
+        number:
+            "SWIMMING POOL 01",
+
+        address:
+            "서울특별시 노원구 월계로 298",
 
         map:
             "https://map.naver.com/p/search/%EC%9B%94%EA%B3%84%EA%B5%AC%EB%AF%BC%EC%B2%B4%EC%9C%A1%EC%84%BC%ED%84%B0",
@@ -599,11 +1741,14 @@ const pools = [
         official:
             "https://www.nowonsc.kr/fmcs/83",
 
-        closedEverySunday: true,
+        closedEverySunday:
+            true,
 
-        closedSecondFourthSunday: false,
+        closedSecondFourthSunday:
+            false,
 
-        closedOnHoliday: false,
+        closedOnHoliday:
+            false,
 
         schedule: {
 
@@ -642,21 +1787,26 @@ const pools = [
 
         },
 
-        notice: ""
+        notice:
+            ""
 
     },
 
 
-    /* =====================================================
-       02. 충무스포츠센터
-    ===================================================== */
+    /* =============================================
+       충무스포츠센터
+    ============================================= */
 
     {
-        name: "충무스포츠센터",
 
-        number: "SWIMMING POOL 02",
+        name:
+            "충무스포츠센터",
 
-        address: "충무스포츠센터",
+        number:
+            "SWIMMING POOL 02",
+
+        address:
+            "충무스포츠센터",
 
         map:
             "https://map.naver.com/p/search/%EC%B6%A9%EB%AC%B4%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0",
@@ -664,11 +1814,14 @@ const pools = [
         official:
             "",
 
-        closedEverySunday: false,
+        closedEverySunday:
+            false,
 
-        closedSecondFourthSunday: true,
+        closedSecondFourthSunday:
+            true,
 
-        closedOnHoliday: true,
+        closedOnHoliday:
+            true,
 
         schedule: {
 
@@ -718,16 +1871,20 @@ const pools = [
     },
 
 
-    /* =====================================================
-       03. 회현스포츠센터
-    ===================================================== */
+    /* =============================================
+       회현스포츠센터
+    ============================================= */
 
     {
-        name: "회현스포츠센터",
 
-        number: "SWIMMING POOL 03",
+        name:
+            "회현스포츠센터",
 
-        address: "회현스포츠센터",
+        number:
+            "SWIMMING POOL 03",
+
+        address:
+            "회현스포츠센터",
 
         map:
             "https://map.naver.com/p/search/%ED%9A%8C%ED%98%84%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0",
@@ -735,11 +1892,14 @@ const pools = [
         official:
             "",
 
-        closedEverySunday: false,
+        closedEverySunday:
+            false,
 
-        closedSecondFourthSunday: true,
+        closedSecondFourthSunday:
+            true,
 
-        closedOnHoliday: true,
+        closedOnHoliday:
+            true,
 
         schedule: {
 
@@ -775,16 +1935,22 @@ const pools = [
 
 
 /* =========================================================
-   오늘의 자유수영 시간 계산
+   TODAY SCHEDULE
 ========================================================= */
 
 function getTodaySchedule(pool) {
 
     if (
-        isSpecialClosure(pool, today)
+        isSpecialClosure(
+            pool,
+            today
+        )
     ) {
+
         return [];
+
     }
+
 
     return pool.schedule[day] || [];
 
@@ -793,7 +1959,7 @@ function getTodaySchedule(pool) {
 
 
 /* =========================================================
-   오늘의 자유수영 표시
+   TODAY TIMES
 ========================================================= */
 
 function createTimes(pool) {
@@ -805,9 +1971,11 @@ function createTimes(pool) {
     if (times.length === 0) {
 
         return `
+
             <div class="time closed">
                 오늘은 휴관
             </div>
+
         `;
 
     }
@@ -816,9 +1984,11 @@ function createTimes(pool) {
     return times.map(function(time) {
 
         return `
+
             <div class="time">
                 ${time}
             </div>
+
         `;
 
     }).join("");
@@ -828,12 +1998,13 @@ function createTimes(pool) {
 
 
 /* =========================================================
-   주간 시간표 생성
+   WEEKLY SCHEDULE
 ========================================================= */
 
 function createWeeklySchedule(pool) {
 
     const dayNames = [
+
         "일",
         "월",
         "화",
@@ -841,17 +2012,15 @@ function createWeeklySchedule(pool) {
         "목",
         "금",
         "토"
+
     ];
 
 
     let html = "";
 
 
-    /*
-     * 월 → 화 → 수 → 목 → 금 → 토 → 일
-     */
-
     const orderedDays = [
+
         1,
         2,
         3,
@@ -859,28 +2028,25 @@ function createWeeklySchedule(pool) {
         5,
         6,
         0
+
     ];
 
 
-    orderedDays.forEach(function(dayNumber) {
+    orderedDays.forEach(
+        function(dayNumber) {
+
 
         const isToday =
             dayNumber === day;
 
 
-        /*
-         * 현재 주에서 해당 요일의 날짜 계산
-         */
-
-        const currentDayIndex =
-            today.getDay();
-
         const diff =
-            dayNumber - currentDayIndex;
+            dayNumber - today.getDay();
 
 
         const targetDate =
             new Date(today);
+
 
         targetDate.setDate(
             today.getDate() + diff
@@ -891,10 +2057,12 @@ function createWeeklySchedule(pool) {
 
 
         if (
+
             isSpecialClosure(
                 pool,
                 targetDate
             )
+
         ) {
 
             times = [];
@@ -902,7 +2070,9 @@ function createWeeklySchedule(pool) {
         } else {
 
             times =
-                pool.schedule[dayNumber] || [];
+                pool.schedule[
+                    dayNumber
+                ] || [];
 
         }
 
@@ -910,7 +2080,9 @@ function createWeeklySchedule(pool) {
         let timeHTML;
 
 
-        if (times.length === 0) {
+        if (
+            times.length === 0
+        ) {
 
             timeHTML =
                 `<span style="color:#aaa;">휴관</span>`;
@@ -925,7 +2097,10 @@ function createWeeklySchedule(pool) {
 
         html += `
 
-            <div class="day ${isToday ? "today-row" : ""}">
+            <div
+                class="day
+                ${isToday ? "today-row" : ""}"
+            >
 
                 <div class="day-name">
                     ${dayNames[dayNumber]}
@@ -949,7 +2124,7 @@ function createWeeklySchedule(pool) {
 
 
 /* =========================================================
-   수영장 카드 생성
+   POOL CARD
 ========================================================= */
 
 function createPoolCard(pool) {
@@ -1016,11 +2191,9 @@ function createPoolCard(pool) {
                 ${pool.number}
             </div>
 
-
             <div class="pool-name">
                 ${pool.name}
             </div>
-
 
             <div class="address">
                 ${pool.address}
@@ -1030,7 +2203,6 @@ function createPoolCard(pool) {
             <div class="schedule-label">
                 오늘의 자유수영
             </div>
-
 
             <div class="times">
                 ${todayTimes}
@@ -1044,10 +2216,6 @@ function createPoolCard(pool) {
 
             ${noticeHTML}
 
-
-            <!-- =================================
-                 접혀 있는 주간 시간표
-            ================================= -->
 
             <section class="weekly">
 
@@ -1077,6 +2245,7 @@ function createPoolCard(pool) {
 
             </section>
 
+
         </section>
 
     `;
@@ -1086,7 +2255,49 @@ function createPoolCard(pool) {
 
 
 /* =========================================================
-   주간 시간표 열기 / 닫기
+   CATEGORY TOGGLE
+========================================================= */
+
+function toggleCategory(button) {
+
+    const content =
+        button.nextElementSibling;
+
+
+    const isOpen =
+        content.classList.contains(
+            "open"
+        );
+
+
+    if (isOpen) {
+
+        content.classList.remove(
+            "open"
+        );
+
+        button.classList.remove(
+            "open"
+        );
+
+    } else {
+
+        content.classList.add(
+            "open"
+        );
+
+        button.classList.add(
+            "open"
+        );
+
+    }
+
+}
+
+
+
+/* =========================================================
+   WEEKLY TOGGLE
 ========================================================= */
 
 function toggleWeekly(button) {
@@ -1096,20 +2307,30 @@ function toggleWeekly(button) {
 
 
     const isOpen =
-        content.classList.contains("open");
+        content.classList.contains(
+            "open"
+        );
 
 
     if (isOpen) {
 
-        content.classList.remove("open");
+        content.classList.remove(
+            "open"
+        );
 
-        button.classList.remove("open");
+        button.classList.remove(
+            "open"
+        );
 
     } else {
 
-        content.classList.add("open");
+        content.classList.add(
+            "open"
+        );
 
-        button.classList.add("open");
+        button.classList.add(
+            "open"
+        );
 
     }
 
@@ -1118,21 +2339,26 @@ function toggleWeekly(button) {
 
 
 /* =========================================================
-   모든 수영장 화면 출력
+   DISPLAY POOLS
 ========================================================= */
 
 const poolContainer =
-    document.getElementById("poolContainer");
+    document.getElementById(
+        "poolContainer"
+    );
 
 
-pools.forEach(function(pool) {
+pools.forEach(
+    function(pool) {
 
-    poolContainer.innerHTML +=
-        createPoolCard(pool);
+        poolContainer.innerHTML +=
+            createPoolCard(pool);
 
-});
+    }
+);
 
 </script>
+
 
 </body>
 </html>
