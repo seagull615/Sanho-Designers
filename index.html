@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sanho&Designers</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            background: #f5f5f2;
+            color: #202020;
+            font-family:
+                -apple-system,
+                BlinkMacSystemFont,
+                "Segoe UI",
+                "Noto Sans KR",
+                sans-serif;
+        }
+
+        .container {
+            width: min(920px, calc(100% - 32px));
+            margin: 0 auto;
+        }
+
+
+        /* =================================
+           HEADER
+        ================================= */
+
+        header {
+            padding: 28px 0 10px;
+        }
+
+        .logo {
+            font-size: 20px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .logo span {
+            font-weight: 400;
+        }
+
+
+        /* =================================
+           TODAY
+        ================================= */
+
+        .today {
+            padding: 55px 0 38px;
+        }
+
+        .today-label {
+            font-size: 12px;
+            color: #999;
+            letter-spacing: 2px;
+            margin-bottom: 12px;
+        }
+
+        .date {
+            font-size: clamp(38px, 8vw, 68px);
+            font-weight: 700;
+            letter-spacing: -3px;
+            line-height: 1.05;
+        }
+
+        .weekday {
+            margin-top: 10px;
+            font-size: 18px;
+            color: #777;
+        }
+
+
+        /* =================================
+           SECTION TITLE
+        ================================= */
+
+        .section-title {
+            font-size: 13px;
+            color: #999;
+            letter-spacing: 1.5px;
+            margin-bottom: 15px;
+        }
+
+
+        /* =================================
+           POOL CARD
+        ================================= */
+
+        .pool-card {
+            background: white;
+            border: 1px solid #e6e6e2;
+            border-radius: 24px;
+            padding: 28px;
+            margin-bottom: 18px;
+        }
+
+        .pool-number {
+            font-size: 11px;
+            color: #aaa;
+            letter-spacing: 2px;
+            margin-bottom: 17px;
+        }
+
+        .pool-name {
+            font-size: clamp(27px, 5vw, 40px);
+            font-weight: 700;
+            letter-spacing: -1.5px;
+            margin-bottom: 7px;
+        }
+
+        .address {
+            font-size: 14px;
+            color: #888;
+            margin-bottom: 30px;
+        }
+
+
+        /* =================================
+           TODAY SCHEDULE
+        ================================= */
+
+        .schedule-label {
+            font-size: 13px;
+            color: #888;
+            margin-bottom: 12px;
+        }
+
+        .times {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 9px;
+        }
+
+        .time {
+            background: #f1f1ed;
+            border-radius: 13px;
+            padding: 14px 18px;
+            font-size: 20px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+
+        .closed {
+            background: #eeeeeb;
+            color: #999;
+            font-weight: 500;
+        }
+
+
+        /* =================================
+           BUTTONS
+        ================================= */
+
+        .buttons {
+            display: flex;
+            gap: 9px;
+            margin-top: 25px;
+            flex-wrap: wrap;
+        }
+
+        .button {
+            display: inline-block;
+            text-decoration: none;
+            color: #333;
+            background: #f1f1ed;
+            padding: 11px 15px;
+            border-radius: 11px;
+            font-size: 13px;
+        }
+
+        .button:hover {
+            background: #e5e5df;
+        }
+
+
+        /* =================================
+           NOTICE
+        ================================= */
+
+        .notice {
+            margin-top: 20px;
+            padding-top: 18px;
+            border-top: 1px solid #eeeeea;
+            color: #999;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+
+        /* =================================
+           COLLAPSIBLE WEEKLY SCHEDULE
+        ================================= */
+
+        .weekly {
+            margin-top: 25px;
+        }
+
+        .weekly-toggle {
+            width: 100%;
+            border: none;
+            background: #f5f5f2;
+            border-radius: 12px;
+            padding: 13px 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            cursor: pointer;
+
+            color: #777;
+            font-size: 13px;
+            text-align: left;
+        }
+
+        .weekly-toggle:hover {
+            background: #eeeeea;
+        }
+
+        .weekly-arrow {
+            font-size: 14px;
+            transition: transform 0.2s ease;
+        }
+
+        .weekly-toggle.open .weekly-arrow {
+            transform: rotate(180deg);
+        }
+
+        .weekly-content {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .weekly-content.open {
+            display: block;
+        }
+
+
+        /* =================================
+           WEEKLY SCHEDULE
+        ================================= */
+
+        .week {
+            background: white;
+            border: 1px solid #e6e6e2;
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .day {
+            display: grid;
+            grid-template-columns: 65px 1fr;
+            padding: 17px 20px;
+            border-bottom: 1px solid #eeeeea;
+        }
+
+        .day:last-child {
+            border-bottom: none;
+        }
+
+        .day-name {
+            font-weight: 600;
+        }
+
+        .day-time {
+            color: #666;
+            line-height: 1.7;
+        }
+
+        .today-row {
+            background: #f3f3ef;
+        }
+
+        .today-row .day-name {
+            font-weight: 700;
+        }
+
+
+        /* =================================
+           FOOTER
+        ================================= */
+
+        footer {
+            padding: 70px 0 35px;
+            color: #aaa;
+            font-size: 12px;
+            line-height: 1.7;
+        }
+
+
+        /* =================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: calc(100% - 28px);
+            }
+
+            .today {
+                padding-top: 40px;
+            }
+
+            .pool-card {
+                padding: 23px;
+                border-radius: 20px;
+            }
+
+            .time {
+                width: 100%;
+                text-align: center;
+            }
+
+            .day {
+                grid-template-columns: 50px 1fr;
+                padding: 16px;
+                font-size: 14px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =================================
+         HEADER
+    ================================= -->
+
+    <header>
+
+        <div class="logo">
+            Sanho<span>&</span>Designers
+        </div>
+
+    </header>
+
+
+    <!-- =================================
+         TODAY
+    ================================= -->
+
+    <section class="today">
+
+        <div class="today-label">
+            TODAY
+        </div>
+
+        <div class="date" id="date">
+            -
+        </div>
+
+        <div class="weekday" id="weekday">
+            -
+        </div>
+
+    </section>
+
+
+    <!-- =================================
+         SWIMMING
+    ================================= -->
+
+    <div class="section-title">
+        SWIMMING TODAY
+    </div>
+
+    <div id="poolContainer">
+        <!-- JavaScript가 수영장 카드를 자동으로 생성 -->
+    </div>
+
+
+    <!-- =================================
+         FOOTER
+    ================================= -->
+
+    <footer>
+
+        Sanho&Designers
+        <br>
+
+        designed together.
+
+    </footer>
+
+
+</div>
+
+
+
+<script>
+
+/* =========================================================
+   기본 날짜 정보
+========================================================= */
+
+const today = new Date();
+
+const year = today.getFullYear();
+const month = today.getMonth() + 1;
+const date = today.getDate();
+
+const day = today.getDay();
+
+
+const weekdays = [
+    "일요일",
+    "월요일",
+    "화요일",
+    "수요일",
+    "목요일",
+    "금요일",
+    "토요일"
+];
+
+
+document.getElementById("date").textContent =
+    `${year}. ${String(month).padStart(2, "0")}. ${String(date).padStart(2, "0")}`;
+
+
+document.getElementById("weekday").textContent =
+    weekdays[day];
+
+
+
+/* =========================================================
+   2026년 공휴일
+========================================================= */
+
+const holidays2026 = [
+
+    "2026-01-01",
+
+    "2026-02-16",
+    "2026-02-17",
+    "2026-02-18",
+
+    "2026-03-01",
+    "2026-03-02",
+
+    "2026-05-05",
+
+    "2026-05-24",
+    "2026-05-25",
+
+    "2026-06-06",
+
+    "2026-08-15",
+    "2026-08-17",
+
+    "2026-10-03",
+    "2026-10-05",
+
+    "2026-10-09",
+
+    "2026-12-25"
+
+];
+
+
+
+/* =========================================================
+   날짜 문자열
+========================================================= */
+
+function getDateString(dateObject) {
+
+    const y = dateObject.getFullYear();
+
+    const m =
+        String(dateObject.getMonth() + 1).padStart(2, "0");
+
+    const d =
+        String(dateObject.getDate()).padStart(2, "0");
+
+    return `${y}-${m}-${d}`;
+}
+
+
+
+/* =========================================================
+   공휴일 여부
+========================================================= */
+
+function isHoliday(dateObject) {
+
+    const dateString =
+        getDateString(dateObject);
+
+    return holidays2026.includes(dateString);
+}
+
+
+
+/* =========================================================
+   해당 일요일이 몇 번째 일요일인지 계산
+========================================================= */
+
+function getSundayWeekNumber(dateObject) {
+
+    return Math.ceil(
+        dateObject.getDate() / 7
+    );
+
+}
+
+
+
+/* =========================================================
+   2·4주차 일요일 여부
+========================================================= */
+
+function isSecondOrFourthSunday(dateObject) {
+
+    if (dateObject.getDay() !== 0) {
+        return false;
+    }
+
+    const weekNumber =
+        getSundayWeekNumber(dateObject);
+
+    return (
+        weekNumber === 2 ||
+        weekNumber === 4
+    );
+
+}
+
+
+
+/* =========================================================
+   특별 휴관 조건
+========================================================= */
+
+function isSpecialClosure(pool, dateObject) {
+
+    if (
+        pool.closedEverySunday &&
+        dateObject.getDay() === 0
+    ) {
+        return true;
+    }
+
+
+    if (
+        pool.closedSecondFourthSunday &&
+        isSecondOrFourthSunday(dateObject)
+    ) {
+        return true;
+    }
+
+
+    if (
+        pool.closedOnHoliday &&
+        isHoliday(dateObject)
+    ) {
+        return true;
+    }
+
+
+    return false;
+}
+
+
+
+/* =========================================================
+   수영장 데이터
+========================================================= */
+
+const pools = [
+
+
+    /* =====================================================
+       01. 월계구민체육센터
+    ===================================================== */
+
+    {
+        name: "월계구민체육센터",
+
+        number: "SWIMMING POOL 01",
+
+        address: "서울특별시 노원구 월계로 298",
+
+        map:
+            "https://map.naver.com/p/search/%EC%9B%94%EA%B3%84%EA%B5%AC%EB%AF%BC%EC%B2%B4%EC%9C%A1%EC%84%BC%ED%84%B0",
+
+        official:
+            "https://www.nowonsc.kr/fmcs/83",
+
+        closedEverySunday: true,
+
+        closedSecondFourthSunday: false,
+
+        closedOnHoliday: false,
+
+        schedule: {
+
+            0: [],
+
+            1: [
+                "12:00–12:50",
+                "15:00–15:50"
+            ],
+
+            2: [
+                "12:00–12:50",
+                "15:00–15:50"
+            ],
+
+            3: [
+                "12:00–12:50",
+                "15:00–15:50"
+            ],
+
+            4: [
+                "12:00–12:50",
+                "15:00–15:50"
+            ],
+
+            5: [
+                "12:00–12:50",
+                "15:00–15:50"
+            ],
+
+            6: [
+                "09:00–10:50",
+                "12:00–13:50",
+                "15:00–16:50"
+            ]
+
+        },
+
+        notice: ""
+
+    },
+
+
+    /* =====================================================
+       02. 충무스포츠센터
+    ===================================================== */
+
+    {
+        name: "충무스포츠센터",
+
+        number: "SWIMMING POOL 02",
+
+        address: "충무스포츠센터",
+
+        map:
+            "https://map.naver.com/p/search/%EC%B6%A9%EB%AC%B4%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0",
+
+        official:
+            "",
+
+        closedEverySunday: false,
+
+        closedSecondFourthSunday: true,
+
+        closedOnHoliday: true,
+
+        schedule: {
+
+            0: [
+                "09:30–11:50",
+                "13:00–14:50",
+                "16:00–17:20"
+            ],
+
+            1: [
+                "08:00–08:50",
+                "21:00–21:50"
+            ],
+
+            2: [
+                "08:00–08:50",
+                "21:00–21:50"
+            ],
+
+            3: [
+                "08:00–08:50",
+                "21:00–21:50"
+            ],
+
+            4: [
+                "08:00–08:50",
+                "21:00–21:50"
+            ],
+
+            5: [
+                "08:00–08:50",
+                "21:00–21:50"
+            ],
+
+            6: [
+                "06:00–07:50",
+                "09:00–10:50",
+                "14:00–14:50",
+                "18:00–19:20"
+            ]
+
+        },
+
+        notice:
+            "2·4주차 일요일 및 법정공휴일은 휴관합니다."
+
+    },
+
+
+    /* =====================================================
+       03. 회현스포츠센터
+    ===================================================== */
+
+    {
+        name: "회현스포츠센터",
+
+        number: "SWIMMING POOL 03",
+
+        address: "회현스포츠센터",
+
+        map:
+            "https://map.naver.com/p/search/%ED%9A%8C%ED%98%84%EC%8A%A4%ED%8F%AC%EC%B8%A0%EC%84%BC%ED%84%B0",
+
+        official:
+            "",
+
+        closedEverySunday: false,
+
+        closedSecondFourthSunday: true,
+
+        closedOnHoliday: true,
+
+        schedule: {
+
+            0: [
+                "09:30–12:50",
+                "14:00–17:20"
+            ],
+
+            1: [],
+
+            2: [],
+
+            3: [],
+
+            4: [],
+
+            5: [],
+
+            6: [
+                "06:00–11:50",
+                "14:00–19:50"
+            ]
+
+        },
+
+        notice:
+            "2·4주차 일요일 및 공휴일은 휴관합니다."
+
+    }
+
+];
+
+
+
+/* =========================================================
+   오늘의 자유수영 시간 계산
+========================================================= */
+
+function getTodaySchedule(pool) {
+
+    if (
+        isSpecialClosure(pool, today)
+    ) {
+        return [];
+    }
+
+    return pool.schedule[day] || [];
+
+}
+
+
+
+/* =========================================================
+   오늘의 자유수영 표시
+========================================================= */
+
+function createTimes(pool) {
+
+    const times =
+        getTodaySchedule(pool);
+
+
+    if (times.length === 0) {
+
+        return `
+            <div class="time closed">
+                오늘은 휴관
+            </div>
+        `;
+
+    }
+
+
+    return times.map(function(time) {
+
+        return `
+            <div class="time">
+                ${time}
+            </div>
+        `;
+
+    }).join("");
+
+}
+
+
+
+/* =========================================================
+   주간 시간표 생성
+========================================================= */
+
+function createWeeklySchedule(pool) {
+
+    const dayNames = [
+        "일",
+        "월",
+        "화",
+        "수",
+        "목",
+        "금",
+        "토"
+    ];
+
+
+    let html = "";
+
+
+    /*
+     * 월 → 화 → 수 → 목 → 금 → 토 → 일
+     */
+
+    const orderedDays = [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        0
+    ];
+
+
+    orderedDays.forEach(function(dayNumber) {
+
+        const isToday =
+            dayNumber === day;
+
+
+        /*
+         * 현재 주에서 해당 요일의 날짜 계산
+         */
+
+        const currentDayIndex =
+            today.getDay();
+
+        const diff =
+            dayNumber - currentDayIndex;
+
+
+        const targetDate =
+            new Date(today);
+
+        targetDate.setDate(
+            today.getDate() + diff
+        );
+
+
+        let times = [];
+
+
+        if (
+            isSpecialClosure(
+                pool,
+                targetDate
+            )
+        ) {
+
+            times = [];
+
+        } else {
+
+            times =
+                pool.schedule[dayNumber] || [];
+
+        }
+
+
+        let timeHTML;
+
+
+        if (times.length === 0) {
+
+            timeHTML =
+                `<span style="color:#aaa;">휴관</span>`;
+
+        } else {
+
+            timeHTML =
+                times.join("<br>");
+
+        }
+
+
+        html += `
+
+            <div class="day ${isToday ? "today-row" : ""}">
+
+                <div class="day-name">
+                    ${dayNames[dayNumber]}
+                </div>
+
+                <div class="day-time">
+                    ${timeHTML}
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    return html;
+
+}
+
+
+
+/* =========================================================
+   수영장 카드 생성
+========================================================= */
+
+function createPoolCard(pool) {
+
+    const todayTimes =
+        createTimes(pool);
+
+
+    const weekly =
+        createWeeklySchedule(pool);
+
+
+    let buttons = `
+
+        <a
+            class="button"
+            href="${pool.map}"
+            target="_blank"
+        >
+            📍 지도
+        </a>
+
+    `;
+
+
+    if (pool.official) {
+
+        buttons += `
+
+            <a
+                class="button"
+                href="${pool.official}"
+                target="_blank"
+            >
+                공식 안내 ↗
+            </a>
+
+        `;
+
+    }
+
+
+    let noticeHTML = "";
+
+
+    if (pool.notice) {
+
+        noticeHTML = `
+
+            <div class="notice">
+                ※ ${pool.notice}
+            </div>
+
+        `;
+
+    }
+
+
+    return `
+
+        <section class="pool-card">
+
+            <div class="pool-number">
+                ${pool.number}
+            </div>
+
+
+            <div class="pool-name">
+                ${pool.name}
+            </div>
+
+
+            <div class="address">
+                ${pool.address}
+            </div>
+
+
+            <div class="schedule-label">
+                오늘의 자유수영
+            </div>
+
+
+            <div class="times">
+                ${todayTimes}
+            </div>
+
+
+            <div class="buttons">
+                ${buttons}
+            </div>
+
+
+            ${noticeHTML}
+
+
+            <!-- =================================
+                 접혀 있는 주간 시간표
+            ================================= -->
+
+            <section class="weekly">
+
+                <button
+                    class="weekly-toggle"
+                    onclick="toggleWeekly(this)"
+                >
+
+                    <span>
+                        주간 자유수영 시간표 보기
+                    </span>
+
+                    <span class="weekly-arrow">
+                        ▼
+                    </span>
+
+                </button>
+
+
+                <div class="weekly-content">
+
+                    <div class="week">
+                        ${weekly}
+                    </div>
+
+                </div>
+
+            </section>
+
+        </section>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   주간 시간표 열기 / 닫기
+========================================================= */
+
+function toggleWeekly(button) {
+
+    const content =
+        button.nextElementSibling;
+
+
+    const isOpen =
+        content.classList.contains("open");
+
+
+    if (isOpen) {
+
+        content.classList.remove("open");
+
+        button.classList.remove("open");
+
+    } else {
+
+        content.classList.add("open");
+
+        button.classList.add("open");
+
+    }
+
+}
+
+
+
+/* =========================================================
+   모든 수영장 화면 출력
+========================================================= */
+
+const poolContainer =
+    document.getElementById("poolContainer");
+
+
+pools.forEach(function(pool) {
+
+    poolContainer.innerHTML +=
+        createPoolCard(pool);
+
+});
+
+</script>
+
+</body>
+</html>
