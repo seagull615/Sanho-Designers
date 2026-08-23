@@ -418,6 +418,78 @@ header {
 
 
 /* =========================================================
+   TRAIN (남행)
+========================================================= */
+
+.time-express {
+    background: #f6e9e6;
+    color: #b6462f;
+}
+
+.time-origin {
+    background: #e6efe8;
+    color: #2f7a4f;
+}
+
+.origin-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 700;
+    color: #2f7a4f;
+    background: #dcece1;
+    border-radius: 6px;
+    padding: 2px 6px;
+    margin-left: 6px;
+    letter-spacing: -0.2px;
+    vertical-align: middle;
+}
+
+.train-row.origin {
+    background: #f5faf6;
+}
+
+.train-scroll {
+    max-height: 360px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #e6e6e2;
+    border-radius: 15px;
+}
+
+.train-row {
+    display: grid;
+    grid-template-columns: 62px 34px 1fr;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #eeeeea;
+    font-size: 13px;
+}
+
+.train-row:last-child {
+    border-bottom: none;
+}
+
+.train-row.past {
+    opacity: 0.4;
+}
+
+.train-time {
+    font-weight: 600;
+}
+
+.train-tag {
+    font-size: 11px;
+    font-weight: 700;
+    color: #b6462f;
+}
+
+.train-dest {
+    color: #666;
+    text-align: right;
+}
+
+
+/* =========================================================
    ECONOMY
 ========================================================= */
 
@@ -625,6 +697,206 @@ header {
     color: #c85a55;
 
     font-weight: 700;
+}
+
+
+/* =========================================================
+   ECONOMY ADD FORM
+========================================================= */
+
+.economy-add-toggle {
+    width: 100%;
+
+    border: none;
+
+    background: #eeeeea;
+
+    border-radius: 11px;
+
+    padding: 12px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    cursor: pointer;
+
+    color: #777;
+
+    font-size: 12px;
+
+    font-family: inherit;
+
+    text-align: left;
+
+    margin-top: 10px;
+}
+
+.economy-add-toggle:hover {
+    background: #e7e7e2;
+}
+
+.economy-add-toggle.open .weekly-arrow {
+    transform: rotate(180deg);
+}
+
+.economy-form-wrap {
+    display: none;
+
+    margin-top: 8px;
+}
+
+.economy-form-wrap.open {
+    display: block;
+}
+
+.economy-form {
+    background: white;
+
+    border: 1px solid #e6e6e2;
+
+    border-radius: 15px;
+
+    padding: 18px;
+}
+
+.form-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    gap: 10px;
+}
+
+.form-field {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+}
+
+.form-field.full {
+    grid-column: 1 / -1;
+}
+
+.form-field label {
+    font-size: 11px;
+
+    color: #999;
+}
+
+.form-field input,
+.form-field select {
+    border: 1px solid #e5e5e1;
+
+    border-radius: 9px;
+
+    padding: 9px 10px;
+
+    font-size: 13px;
+
+    font-family: inherit;
+
+    background: #fafaf8;
+
+    color: #202020;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+    outline: none;
+
+    border-color: #c8c8c2;
+}
+
+.color-swatches {
+    display: flex;
+
+    gap: 8px;
+
+    margin-top: 2px;
+}
+
+.color-swatch {
+    width: 22px;
+
+    height: 22px;
+
+    border-radius: 50%;
+
+    cursor: pointer;
+
+    border: 2px solid transparent;
+}
+
+.color-swatch.selected {
+    border-color: #333;
+}
+
+.color-swatch.green { background: #62b96b; }
+.color-swatch.yellow { background: #e6c94f; }
+.color-swatch.blue { background: #5d9bd3; }
+.color-swatch.red { background: #df6a65; }
+
+.form-submit {
+    margin-top: 14px;
+
+    width: 100%;
+
+    border: none;
+
+    background: #202020;
+
+    color: white;
+
+    border-radius: 10px;
+
+    padding: 12px;
+
+    font-size: 13px;
+
+    font-weight: 600;
+
+    font-family: inherit;
+
+    cursor: pointer;
+}
+
+.form-submit:hover {
+    background: #333;
+}
+
+.economy-card {
+    position: relative;
+}
+
+.card-delete {
+    position: absolute;
+
+    top: 18px;
+
+    right: 18px;
+
+    border: none;
+
+    background: transparent;
+
+    color: #bbb;
+
+    font-size: 16px;
+
+    cursor: pointer;
+
+    line-height: 1;
+
+    padding: 4px;
+}
+
+.card-delete:hover {
+    color: #c85a55;
 }
 
 
@@ -957,6 +1229,46 @@ footer {
 
 
 <!-- =======================================================
+     TRAIN (남행)
+======================================================= -->
+
+<section class="category">
+
+    <button
+        class="category-toggle"
+        onclick="toggleCategory(this)"
+    >
+
+        <div class="category-left">
+
+            <span class="category-icon">
+                🚆
+            </span>
+
+            <span class="category-name">
+                전철 (남행)
+            </span>
+
+        </div>
+
+        <span class="category-arrow">
+            ▼
+        </span>
+
+    </button>
+
+
+    <div class="category-content">
+
+        <div id="trainContainer"></div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
      ECONOMY
 ======================================================= -->
 
@@ -1233,6 +1545,149 @@ footer {
 
             </article>
 
+
+            <div id="economyDynamicList"></div>
+
+
+        </div>
+
+
+        <button
+            class="economy-add-toggle"
+            onclick="toggleAddForm(this)"
+        >
+
+            <span>
+                + 새 항목 추가
+            </span>
+
+            <span class="weekly-arrow">
+                ▼
+            </span>
+
+        </button>
+
+
+        <div class="economy-form-wrap">
+
+            <form
+                class="economy-form"
+                onsubmit="handleAddEconomyItem(event)"
+            >
+
+                <div class="form-grid">
+
+                    <div class="form-field">
+                        <label>카테고리</label>
+                        <input
+                            type="text"
+                            id="ef-category"
+                            placeholder="외식"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label>이름</label>
+                        <input
+                            type="text"
+                            id="ef-name"
+                            placeholder="우육면"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label>가격 (원)</label>
+                        <input
+                            type="number"
+                            id="ef-price"
+                            placeholder="12000"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label>할인율 (%)</label>
+                        <input
+                            type="number"
+                            id="ef-discount"
+                            placeholder="0"
+                            min="0"
+                            max="100"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label>효용 (+)</label>
+                        <input
+                            type="number"
+                            id="ef-utility-pos"
+                            placeholder="0"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="form-field">
+                        <label>아쉬움 (-)</label>
+                        <input
+                            type="number"
+                            id="ef-utility-neg"
+                            placeholder="0"
+                            value="0"
+                        >
+                    </div>
+
+                    <div class="form-field full">
+
+                        <label>표시 색상</label>
+
+                        <div
+                            class="color-swatches"
+                            id="ef-color-swatches"
+                        >
+
+                            <div
+                                class="color-swatch green"
+                                data-color="green"
+                                onclick="selectSwatch(this)"
+                            ></div>
+
+                            <div
+                                class="color-swatch yellow selected"
+                                data-color="yellow"
+                                onclick="selectSwatch(this)"
+                            ></div>
+
+                            <div
+                                class="color-swatch blue"
+                                data-color="blue"
+                                onclick="selectSwatch(this)"
+                            ></div>
+
+                            <div
+                                class="color-swatch red"
+                                data-color="red"
+                                onclick="selectSwatch(this)"
+                            ></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="form-submit"
+                >
+                    저장하기
+                </button>
+
+            </form>
 
         </div>
 
@@ -1710,6 +2165,1156 @@ function isSpecialClosure(
     return false;
 
 }
+
+
+
+/* =========================================================
+   TRAIN DATA (남행, 광운대역 통과 기준)
+   각 항목: [출발시각, 표기(첫/막/급 등), 행선지]
+   평일 / 토요일·공휴일 시간표는 동일하여 하나로 통합
+========================================================= */
+
+const trainScheduleWeekday = [
+    ["05:00","첫","인천","광운대"],
+    ["05:07","","인천","창동"],
+    ["05:12","첫","서동탄","광운대"],
+    ["05:27","","인천","의정부"],
+    ["05:33","","인천","양주"],
+    ["05:39","","서동탄","광운대"],
+    ["05:43","","인천","양주"],
+    ["05:56","","서동탄","광운대"],
+    ["06:08","","인천","소요산"],
+    ["06:13","첫","천안","광운대"],
+    ["06:26","","인천","양주"],
+    ["06:30","","서동탄","광운대"],
+    ["06:37","","천안","광운대"],
+    ["06:41","","인천","연천"],
+    ["06:48","","인천","의정부"],
+    ["06:52","","병점","광운대"],
+    ["06:56","첫","신창","광운대"],
+    ["07:00","","인천","동두천"],
+    ["07:08","","서동탄","의정부"],
+    ["07:13","","인천","양주"],
+    ["07:17","","신창","광운대"],
+    ["07:20","","인천","동두천"],
+    ["07:29","","서동탄","의정부"],
+    ["07:33","","인천","연천"],
+    ["07:40","","인천","동두천"],
+    ["07:44","","신창","광운대"],
+    ["07:47","급첫","부평","동두천"],
+    ["07:54","","인천","양주"],
+    ["07:58","","서동탄","광운대"],
+    ["08:01","","구로","동두천"],
+    ["08:05","","인천","양주"],
+    ["08:08","","신창","광운대"],
+    ["08:11","","부평","연천"],
+    ["08:17","","인천","동두천"],
+    ["08:21","","서동탄","광운대"],
+    ["08:25","","인천","양주"],
+    ["08:29","","부평","동두천"],
+    ["08:37","","인천","소요산"],
+    ["08:41","","서동탄","광운대"],
+    ["08:44","급첫","인천","동두천"],
+    ["08:50","","인천","연천"],
+    ["08:55","","신창","광운대"],
+    ["09:02","","병점","광운대"],
+    ["09:06","","인천","동두천"],
+    ["09:14","","인천","의정부"],
+    ["09:19","","서동탄","광운대"],
+    ["09:25","","인천","소요산"],
+    ["09:35","","서동탄","광운대"],
+    ["09:40","","인천","의정부"],
+    ["09:48","","구로","연천"],
+    ["09:58","","신창","광운대"],
+    ["10:01","","인천","동두천"],
+    ["10:10","","인천","동두천"],
+    ["10:15","","구로","양주"],
+    ["10:24","","인천","의정부"],
+    ["10:29","","서동탄","광운대"],
+    ["10:39","","서울역","양주"],
+    ["10:43","","신창","광운대"],
+    ["10:48","","구로","연천"],
+    ["10:57","","인천","동두천"],
+    ["11:02","급","인천","동두천"],
+    ["11:08","","병점","광운대"],
+    ["11:13","","인천","의정부"],
+    ["11:21","","인천","양주"],
+    ["11:29","","서동탄","광운대"],
+    ["11:33","","인천","소요산"],
+    ["11:42","","구로","연천"],
+    ["11:51","","인천","양주"],
+    ["12:00","","신창","광운대"],
+    ["12:04","급","인천","동두천"],
+    ["12:14","","인천","의정부"],
+    ["12:19","","천안","광운대"],
+    ["12:23","","인천","양주"],
+    ["12:27","","서동탄","광운대"],
+    ["12:32","","인천","소요산"],
+    ["12:43","","인천","양주"],
+    ["12:51","","서동탄","광운대"],
+    ["12:55","","인천","의정부"],
+    ["12:59","","신창","광운대"],
+    ["13:03","급","인천","동두천"],
+    ["13:09","","인천","양주"],
+    ["13:14","","서동탄","광운대"],
+    ["13:18","","인천","의정부"],
+    ["13:26","","인천","소요산"],
+    ["13:40","","인천","의정부"],
+    ["13:44","","서동탄","광운대"],
+    ["13:48","","구로","연천"],
+    ["13:57","","인천","양주"],
+    ["14:01","","서동탄","광운대"],
+    ["14:05","급","인천","동두천"],
+    ["14:15","","인천","양주"],
+    ["14:19","","신창","광운대"],
+    ["14:30","","인천","소요산"],
+    ["14:37","","천안","광운대"],
+    ["14:42","","인천","양주"],
+    ["14:51","","서동탄","광운대"],
+    ["14:55","","인천","연천"],
+    ["15:03","","인천","양주"],
+    ["15:16","","신창","광운대"],
+    ["15:21","","인천","의정부"],
+    ["15:35","","인천","소요산"],
+    ["15:40","","신창","광운대"],
+    ["15:44","","인천","의정부"],
+    ["15:52","","서동탄","광운대"],
+    ["15:56","","인천","연천"],
+    ["16:01","","인천","양주"],
+    ["16:09","급막","인천","동두천"],
+    ["16:13","","서동탄","광운대"],
+    ["16:18","","인천","의정부"],
+    ["16:26","","인천","양주"],
+    ["16:33","","인천","소요산"],
+    ["16:37","","천안","광운대"],
+    ["16:50","","서동탄","광운대"],
+    ["16:53","","인천","연천"],
+    ["16:58","","천안","광운대"],
+    ["17:02","","인천","양주"],
+    ["17:10","","서동탄","광운대"],
+    ["17:15","","인천","의정부"],
+    ["17:19","","신창","광운대"],
+    ["17:23","","인천","동두천"],
+    ["17:32","","인천","소요산"],
+    ["17:36","","천안","광운대"],
+    ["17:41","","인천","의정부"],
+    ["17:48","","인천","연천"],
+    ["17:54","","신창","광운대"],
+    ["17:58","","인천","동두천"],
+    ["18:07","","인천","양주"],
+    ["18:12","","신창","광운대"],
+    ["18:17","","인천","의정부"],
+    ["18:21","","서동탄","광운대"],
+    ["18:25","","인천","소요산"],
+    ["18:29","","천안","광운대"],
+    ["18:33","","인천","양주"],
+    ["18:40","","신창","광운대"],
+    ["18:43","","인천","연천"],
+    ["18:48","","신창","광운대"],
+    ["18:52","","인천","양주"],
+    ["18:55","","서동탄","광운대"],
+    ["18:58","","인천","동두천"],
+    ["19:07","","서동탄","광운대"],
+    ["19:11","","인천","양주"],
+    ["19:15","","천안","광운대"],
+    ["19:20","","인천","의정부"],
+    ["19:28","","인천","소요산"],
+    ["19:35","","서동탄","광운대"],
+    ["19:39","","인천","양주"],
+    ["19:43","","천안","광운대"],
+    ["19:46","","인천","연천"],
+    ["19:54","","인천","양주"],
+    ["19:59","","신창","광운대"],
+    ["20:03","","인천","동두천"],
+    ["20:09","","서동탄","광운대"],
+    ["20:13","","인천","양주"],
+    ["20:19","","천안","광운대"],
+    ["20:23","","인천","의정부"],
+    ["20:28","","서동탄","광운대"],
+    ["20:33","","인천","동두천"],
+    ["20:43","","인천","연천"],
+    ["20:47","","서동탄","광운대"],
+    ["20:52","","인천","동두천"],
+    ["21:00","","인천","양주"],
+    ["21:06","막","신창","광운대"],
+    ["21:10","","인천","동두천"],
+    ["21:15","","병점","광운대"],
+    ["21:19","","인천","양주"],
+    ["21:23","","구로","연천"],
+    ["21:32","","인천","의정부"],
+    ["21:38","","서동탄","광운대"],
+    ["21:44","","인천","소요산"],
+    ["21:53","","인천","연천"],
+    ["21:59","","서동탄","광운대"],
+    ["22:06","","인천","동두천"],
+    ["22:11","","병점","광운대"],
+    ["22:21","","인천","의정부"],
+    ["22:27","","서동탄","광운대"],
+    ["22:32","","서울역","양주"],
+    ["22:37","","구로","광운대"],
+    ["22:42","","인천","소요산"],
+    ["22:47","막","서동탄","광운대"],
+    ["22:53","","인천","연천"],
+    ["23:02","막","인천","의정부"],
+    ["23:10","","구로","양주"],
+    ["23:18","","구로","동두천"],
+    ["23:26","","구로","양주"],
+    ["23:34","","구로","광운대"],
+    ["23:42","막","구로","의정부"],
+    ["00:00","막","서울역","의정부"]
+];
+
+
+const trainScheduleHoliday = [
+    ["05:00","첫","인천","광운대"],
+    ["05:12","","인천","광운대"],
+    ["05:24","첫","서동탄","광운대"],
+    ["05:30","","인천","의정부"],
+    ["05:41","","인천","양주"],
+    ["05:47","","서동탄","광운대"],
+    ["05:58","첫","천안","광운대"],
+    ["06:08","","인천","소요산"],
+    ["06:13","","병점","광운대"],
+    ["06:26","","인천","양주"],
+    ["06:30","","서동탄","광운대"],
+    ["06:34","첫","신창","광운대"],
+    ["06:40","","인천","연천"],
+    ["06:49","","인천","의정부"],
+    ["06:57","","병점","광운대"],
+    ["07:01","","천안","광운대"],
+    ["07:04","","인천","동두천"],
+    ["07:13","","인천","양주"],
+    ["07:22","","인천","소요산"],
+    ["07:30","","서동탄","광운대"],
+    ["07:34","","인천","동두천"],
+    ["07:41","","구로","연천"],
+    ["07:45","","신창","광운대"],
+    ["07:57","","서동탄","광운대"],
+    ["08:07","","신창","광운대"],
+    ["08:11","","인천","동두천"],
+    ["08:21","","서동탄","광운대"],
+    ["08:28","","구로","양주"],
+    ["08:35","","인천","소요산"],
+    ["08:41","","서동탄","광운대"],
+    ["08:45","","인천","연천"],
+    ["08:53","","인천","양주"],
+    ["08:58","","병점","광운대"],
+    ["09:02","","인천","동두천"],
+    ["09:13","","서동탄","광운대"],
+    ["09:17","","구로","양주"],
+    ["09:26","","인천","소요산"],
+    ["09:32","","병점","광운대"],
+    ["09:39","","인천","의정부"],
+    ["09:48","","인천","연천"],
+    ["09:54","","신창","광운대"],
+    ["09:58","","인천","양주"],
+    ["10:08","","신창","광운대"],
+    ["10:12","","인천","동두천"],
+    ["10:24","","인천","광운대"],
+    ["10:29","","서동탄","광운대"],
+    ["10:34","","인천","소요산"],
+    ["10:38","","구로","광운대"],
+    ["10:43","","인천","양주"],
+    ["10:50","","신창","광운대"],
+    ["10:54","","인천","연천"],
+    ["10:59","","서동탄","광운대"],
+    ["11:03","","인천","동두천"],
+    ["11:08","","신창","광운대"],
+    ["11:13","","인천","의정부"],
+    ["11:20","","천안","광운대"],
+    ["11:25","","인천","양주"],
+    ["11:33","","인천","소요산"],
+    ["11:41","","신창","광운대"],
+    ["11:46","","인천","연천"],
+    ["11:50","","서동탄","광운대"],
+    ["11:54","","인천","양주"],
+    ["11:59","","천안","광운대"],
+    ["12:02","","인천","동두천"],
+    ["12:13","","인천","의정부"],
+    ["12:17","","신창","광운대"],
+    ["12:23","","인천","양주"],
+    ["12:28","","서동탄","광운대"],
+    ["12:32","","인천","소요산"],
+    ["12:38","","신창","광운대"],
+    ["12:43","","인천","연천"],
+    ["12:51","","서동탄","광운대"],
+    ["12:55","","인천","양주"],
+    ["13:00","","천안","광운대"],
+    ["13:03","","인천","동두천"],
+    ["13:15","","서동탄","광운대"],
+    ["13:19","","인천","양주"],
+    ["13:22","","병점","광운대"],
+    ["13:27","","인천","소요산"],
+    ["13:31","","신창","광운대"],
+    ["13:39","","인천","의정부"],
+    ["13:47","","인천","연천"],
+    ["13:51","","서동탄","광운대"],
+    ["13:57","","인천","양주"],
+    ["14:04","","서동탄","광운대"],
+    ["14:08","","인천","동두천"],
+    ["14:18","","인천","양주"],
+    ["14:22","","천안","광운대"],
+    ["14:28","","인천","소요산"],
+    ["14:33","","서동탄","광운대"],
+    ["14:39","","천안","광운대"],
+    ["14:44","","인천","의정부"],
+    ["14:53","","인천","연천"],
+    ["14:57","","서동탄","광운대"],
+    ["15:02","","인천","양주"],
+    ["15:12","","인천","동두천"],
+    ["15:17","","신창","광운대"],
+    ["15:21","","인천","의정부"],
+    ["15:25","","구로","소요산"],
+    ["15:29","","서동탄","광운대"],
+    ["15:34","","인천","양주"],
+    ["15:44","","신창","광운대"],
+    ["15:49","","인천","연천"],
+    ["15:53","","병점","광운대"],
+    ["15:56","","인천","양주"],
+    ["16:00","","서동탄","광운대"],
+    ["16:03","","인천","동두천"],
+    ["16:11","","신창","광운대"],
+    ["16:15","","인천","양주"],
+    ["16:20","","서동탄","광운대"],
+    ["16:24","","인천","의정부"],
+    ["16:29","","병점","광운대"],
+    ["16:33","","인천","소요산"],
+    ["16:37","","천안","광운대"],
+    ["16:41","","구로","동두천"],
+    ["16:52","","서동탄","광운대"],
+    ["16:55","","인천","의정부"],
+    ["17:04","","서울역","양주"],
+    ["17:08","","서동탄","광운대"],
+    ["17:14","","인천","의정부"],
+    ["17:18","","신창","광운대"],
+    ["17:28","","인천","소요산"],
+    ["17:37","","인천","의정부"],
+    ["17:42","","서동탄","광운대"],
+    ["17:46","","인천","연천"],
+    ["17:56","","서동탄","광운대"],
+    ["18:01","","인천","양주"],
+    ["18:10","","서동탄","광운대"],
+    ["18:14","","인천","양주"],
+    ["18:17","","신창","광운대"],
+    ["18:21","","인천","의정부"],
+    ["18:26","","인천","소요산"],
+    ["18:29","","서동탄","광운대"],
+    ["18:34","","인천","의정부"],
+    ["18:43","","신창","광운대"],
+    ["18:48","","인천","연천"],
+    ["18:55","","서동탄","광운대"],
+    ["19:00","","인천","동두천"],
+    ["19:05","","신창","광운대"],
+    ["19:09","","인천","의정부"],
+    ["19:18","","인천","양주"],
+    ["19:22","","천안","광운대"],
+    ["19:31","","인천","소요산"],
+    ["19:35","","신창","광운대"],
+    ["19:40","","인천","양주"],
+    ["19:49","","인천","연천"],
+    ["19:53","","인천","동두천"],
+    ["19:58","막","신창","광운대"],
+    ["20:03","","인천","양주"],
+    ["20:10","","서동탄","광운대"],
+    ["20:15","","인천","의정부"],
+    ["20:20","","천안","광운대"],
+    ["20:27","","인천","소요산"],
+    ["20:31","","서동탄","광운대"],
+    ["20:35","","구로","의정부"],
+    ["20:43","","인천","연천"],
+    ["20:48","","병점","광운대"],
+    ["20:52","","인천","양주"],
+    ["21:01","","인천","동두천"],
+    ["21:08","","서동탄","광운대"],
+    ["21:13","","인천","양주"],
+    ["21:18","","서동탄","광운대"],
+    ["21:30","","인천","소요산"],
+    ["21:35","","서동탄","광운대"],
+    ["21:45","","인천","연천"],
+    ["21:50","막","천안","광운대"],
+    ["21:54","","인천","의정부"],
+    ["21:59","","병점","광운대"],
+    ["22:04","","인천","양주"],
+    ["22:11","막","서동탄","광운대"],
+    ["22:14","","인천","동두천"],
+    ["22:19","","병점","광운대"],
+    ["22:24","","인천","양주"],
+    ["22:32","","인천","소요산"],
+    ["22:43","","인천","연천"],
+    ["22:49","막","병점","광운대"],
+    ["22:55","막","인천","의정부"],
+    ["23:02","","구로","양주"],
+    ["23:13","","구로","의정부"],
+    ["23:23","","구로","동두천"],
+    ["23:37","막","구로","소요산"]
+];
+
+
+/* =========================================================
+   TRAIN SCHEDULE FOR TODAY
+========================================================= */
+
+/* =========================================================
+   TRAIN SCHEDULE FOR A GIVEN DATE
+========================================================= */
+
+function isTrainHolidayType(dateObject) {
+
+    return (
+        isHoliday(dateObject) ||
+        dateObject.getDay() === 0 ||
+        dateObject.getDay() === 6
+    );
+
+}
+
+
+function getTrainScheduleForDate(dateObject) {
+
+    if (isTrainHolidayType(dateObject)) {
+
+        return trainScheduleHoliday;
+
+    }
+
+    return trainScheduleWeekday;
+
+}
+
+
+function getTodayTrainSchedule() {
+
+    return getTrainScheduleForDate(today);
+
+}
+
+
+
+/* =========================================================
+   TOMORROW
+========================================================= */
+
+const tomorrow = new Date(today);
+
+tomorrow.setDate(
+    today.getDate() + 1
+);
+
+
+function getTomorrowLabel() {
+
+    const m =
+        tomorrow.getMonth() + 1;
+
+    const d =
+        tomorrow.getDate();
+
+    const w =
+        weekdays[tomorrow.getDay()];
+
+    return `${m}/${d} ${w}`;
+
+}
+
+
+
+/* =========================================================
+   TRAIN TIME → MINUTES (00~02시대는 익일 새벽으로 취급)
+========================================================= */
+
+function trainTimeToMinutes(timeStr) {
+
+    let [h, m] =
+        timeStr.split(":").map(Number);
+
+    if (h < 3) {
+
+        h += 24;
+
+    }
+
+    return h * 60 + m;
+
+}
+
+
+
+/* =========================================================
+   NEXT TRAINS
+========================================================= */
+
+function getNextTrains(limit) {
+
+    const schedule =
+        getTodayTrainSchedule();
+
+    const now = new Date();
+
+    let nowMinutes =
+        now.getHours() * 60 + now.getMinutes();
+
+    if (now.getHours() < 3) {
+
+        nowMinutes += 24 * 60;
+
+    }
+
+    return schedule
+        .filter(function(row) {
+
+            return trainTimeToMinutes(row[0]) >= nowMinutes;
+
+        })
+        .slice(0, limit);
+
+}
+
+
+
+/* =========================================================
+   TRAIN LABEL
+========================================================= */
+
+const trainMarkerLabel = {
+
+    "첫": "첫차",
+    "막": "막차",
+    "급": "급행",
+    "급첫": "첫차·급행",
+    "급막": "막차·급행",
+    "막급": "막차·급행"
+
+};
+
+
+function formatTrainPill(row) {
+
+    const time = row[0];
+    const marker = row[1];
+    const dest = row[2];
+
+    const markerLabel =
+        marker ? ` · ${trainMarkerLabel[marker] || marker}` : "";
+
+    return `${time} · ${dest}행${markerLabel}`;
+
+}
+
+
+function isFromGwangwoon(row) {
+
+    return row[3] === "광운대";
+
+}
+
+
+
+/* =========================================================
+   TRAIN TODAY TIMES (PILLS)
+========================================================= */
+
+function createTrainTimes() {
+
+    const next =
+        getNextTrains(6);
+
+    if (next.length === 0) {
+
+        return `
+
+            <div class="time closed">
+                금일 운행 종료
+            </div>
+
+        `;
+
+    }
+
+    return next.map(function(row) {
+
+        const isExpress =
+            row[1] &&
+            row[1].indexOf("급") !== -1;
+
+        const isOrigin =
+            isFromGwangwoon(row);
+
+        const pillClass =
+            isOrigin
+                ? "time-origin"
+                : (isExpress ? "time-express" : "");
+
+        const badge =
+            isOrigin
+                ? `<span class="origin-badge">광운대발</span>`
+                : "";
+
+        return `
+
+            <div class="time ${pillClass}">
+                ${formatTrainPill(row)}${badge}
+            </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+
+/* =========================================================
+   TRAIN FULL SCHEDULE
+========================================================= */
+
+function createTrainFullSchedule(schedule, markPast) {
+
+    const now = new Date();
+
+    let nowMinutes =
+        now.getHours() * 60 + now.getMinutes();
+
+    if (now.getHours() < 3) {
+
+        nowMinutes += 24 * 60;
+
+    }
+
+    return schedule.map(function(row) {
+
+        const isPast =
+            markPast &&
+            trainTimeToMinutes(row[0]) < nowMinutes;
+
+        const isOrigin =
+            isFromGwangwoon(row);
+
+        const markerLabel =
+            row[1] ? (trainMarkerLabel[row[1]] || row[1]) : "";
+
+        const rowClasses =
+            `train-row ${isPast ? "past" : ""} ${isOrigin ? "origin" : ""}`;
+
+        return `
+
+            <div class="${rowClasses}">
+
+                <div class="train-time">
+                    ${row[0]}
+                </div>
+
+                <div class="train-tag">
+                    ${markerLabel}
+                </div>
+
+                <div class="train-dest">
+                    ${row[2]}행${isOrigin ? ` <span class="origin-badge">광운대발</span>` : ""}
+                </div>
+
+            </div>
+
+        `;
+
+    }).join("");
+
+}
+
+
+
+/* =========================================================
+   TRAIN CARD
+========================================================= */
+
+function createTrainCard() {
+
+    const dayLabel =
+        (isHoliday(today) || day === 0 || day === 6)
+            ? "토요일·일요일·공휴일 시간표"
+            : "평일 시간표";
+
+    return `
+
+        <section class="pool-card">
+
+            <div class="pool-number">
+                LINE 1 · GWANGWOON UNIV.
+            </div>
+
+            <div class="pool-name">
+                광운대역 남행
+            </div>
+
+            <div class="address">
+                경원선 · 인천 · 구로 · 서울역 · 서동탄 · 병점 · 천안 · 신창 방면 (${dayLabel})
+            </div>
+
+
+            <div class="schedule-label">
+                오늘의 다음 열차
+            </div>
+
+            <div class="times">
+                ${createTrainTimes()}
+            </div>
+
+
+            <div class="buttons">
+
+                <a
+                    class="button"
+                    href="https://map.naver.com/p/search/%EA%B4%91%EC%9A%B4%EB%8C%80%EC%97%AD"
+                    target="_blank"
+                >
+                    📍 지도
+                </a>
+
+            </div>
+
+
+            <section class="weekly">
+
+                <button
+                    class="weekly-toggle"
+                    onclick="toggleWeekly(this)"
+                >
+
+                    <span>
+                        오늘의 전체 시간표 보기
+                    </span>
+
+                    <span class="weekly-arrow">
+                        ▼
+                    </span>
+
+                </button>
+
+
+                <div class="weekly-content">
+
+                    <div class="train-scroll">
+                        ${createTrainFullSchedule(getTodayTrainSchedule(), true)}
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <section class="weekly">
+
+                <button
+                    class="weekly-toggle"
+                    onclick="toggleWeekly(this)"
+                >
+
+                    <span>
+                        내일 (${getTomorrowLabel()}) 시간표 미리보기
+                    </span>
+
+                    <span class="weekly-arrow">
+                        ▼
+                    </span>
+
+                </button>
+
+
+                <div class="weekly-content">
+
+                    <div class="train-scroll">
+                        ${createTrainFullSchedule(getTrainScheduleForDate(tomorrow), false)}
+                    </div>
+
+                </div>
+
+            </section>
+
+
+        </section>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   DISPLAY TRAIN CARD
+========================================================= */
+
+document.getElementById("trainContainer").innerHTML =
+    createTrainCard();
+
+
+
+/* =========================================================
+   ECONOMY — USER-ADDED ITEMS (localStorage)
+========================================================= */
+
+const ECONOMY_STORAGE_KEY =
+    "sanhoEconomyItems";
+
+
+function loadEconomyItems() {
+
+    try {
+
+        const raw =
+            localStorage.getItem(ECONOMY_STORAGE_KEY);
+
+        const parsed =
+            raw ? JSON.parse(raw) : [];
+
+        return Array.isArray(parsed) ? parsed : [];
+
+    } catch (e) {
+
+        return [];
+
+    }
+
+}
+
+
+function saveEconomyItems(items) {
+
+    try {
+
+        localStorage.setItem(
+            ECONOMY_STORAGE_KEY,
+            JSON.stringify(items)
+        );
+
+    } catch (e) {
+
+        // storage unavailable, ignore silently
+
+    }
+
+}
+
+
+
+/* =========================================================
+   ECONOMY GAUGE SCALE (price magnitude 기반 자동 산정)
+========================================================= */
+
+function getEconomyGaugeScale(price) {
+
+    if (price <= 10000) {
+
+        return {
+            min: 0,
+            max: 10000,
+            minLabel: "0원",
+            maxLabel: "1만원"
+        };
+
+    }
+
+    if (price <= 100000) {
+
+        return {
+            min: 10000,
+            max: 100000,
+            minLabel: "1만원",
+            maxLabel: "10만원"
+        };
+
+    }
+
+    if (price <= 1000000) {
+
+        return {
+            min: 100000,
+            max: 1000000,
+            minLabel: "10만원",
+            maxLabel: "100만원"
+        };
+
+    }
+
+    return {
+        min: 1000000,
+        max: 10000000,
+        minLabel: "100만원",
+        maxLabel: "1000만원"
+    };
+
+}
+
+
+function formatWon(price) {
+
+    return `${Number(price).toLocaleString("ko-KR")}원`;
+
+}
+
+
+
+/* =========================================================
+   ECONOMY CARD (USER ITEM)
+========================================================= */
+
+function createEconomyItemCard(item, index) {
+
+    const scale =
+        getEconomyGaugeScale(item.price);
+
+    let percent =
+        ((item.price - scale.min) / (scale.max - scale.min)) * 100;
+
+    percent =
+        Math.max(0, Math.min(100, percent));
+
+    const color =
+        item.color || "yellow";
+
+    const utilityPos =
+        Number(item.utilityPos) || 0;
+
+    const utilityNeg =
+        Number(item.utilityNeg) || 0;
+
+    const utilityPosClass =
+        utilityPos >= 0 ? "utility-positive" : "utility-negative";
+
+    const utilityNegClass =
+        utilityNeg <= 0 ? "utility-negative" : "utility-positive";
+
+    return `
+
+        <article class="economy-card">
+
+            <button
+                class="card-delete"
+                onclick="deleteEconomyItem(${index})"
+                aria-label="삭제"
+            >
+                ✕
+            </button>
+
+            <div class="economy-category">
+                ${item.category}
+            </div>
+
+            <div class="economy-name">
+                ${item.name}
+            </div>
+
+
+            <div class="economy-price">
+
+                <span class="price-number">
+                    ${formatWon(item.price)}
+                </span>
+
+                <span class="price-dot ${color}"></span>
+
+            </div>
+
+
+            <div class="money-gauge">
+
+                <div class="gauge-small">
+
+                    <div
+                        class="gauge-fill ${color}"
+                        style="width:${percent.toFixed(1)}%;"
+                    ></div>
+
+                </div>
+
+                <div class="gauge-scale">
+
+                    <span>
+                        ${scale.minLabel}
+                    </span>
+
+                    <span>
+                        ${scale.maxLabel}
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="economy-info">
+
+                <div class="info-item">
+                    할인
+                    <span class="info-value">
+                        ${Number(item.discount) || 0}%
+                    </span>
+                </div>
+
+                <div class="info-item">
+                    효용
+                    <span class="${utilityPosClass}">
+                        ${utilityPos >= 0 ? "+" : ""}${utilityPos}
+                    </span>
+                </div>
+
+                <div class="info-item">
+                    아쉬움
+                    <span class="${utilityNegClass}">
+                        ${utilityNeg}
+                    </span>
+                </div>
+
+            </div>
+
+        </article>
+
+    `;
+
+}
+
+
+
+/* =========================================================
+   RENDER ECONOMY DYNAMIC LIST
+========================================================= */
+
+function renderEconomyItems() {
+
+    const items =
+        loadEconomyItems();
+
+    const container =
+        document.getElementById("economyDynamicList");
+
+    container.innerHTML =
+        items.map(function(item, index) {
+
+            return createEconomyItemCard(item, index);
+
+        }).join("");
+
+}
+
+
+renderEconomyItems();
+
+
+
+/* =========================================================
+   ADD ECONOMY ITEM — FORM HANDLERS
+========================================================= */
+
+function toggleAddForm(button) {
+
+    const wrap =
+        button.nextElementSibling;
+
+    const isOpen =
+        wrap.classList.contains("open");
+
+    if (isOpen) {
+
+        wrap.classList.remove("open");
+        button.classList.remove("open");
+
+    } else {
+
+        wrap.classList.add("open");
+        button.classList.add("open");
+
+    }
+
+}
+
+
+function selectSwatch(el) {
+
+    const swatches =
+        document.getElementById("ef-color-swatches")
+            .querySelectorAll(".color-swatch");
+
+    swatches.forEach(function(s) {
+
+        s.classList.remove("selected");
+
+    });
+
+    el.classList.add("selected");
+
+}
+
+
+function handleAddEconomyItem(event) {
+
+    event.preventDefault();
+
+    const category =
+        document.getElementById("ef-category").value.trim();
+
+    const name =
+        document.getElementById("ef-name").value.trim();
+
+    const price =
+        Number(document.getElementById("ef-price").value);
+
+    const discount =
+        Number(document.getElementById("ef-discount").value) || 0;
+
+    const utilityPos =
+        Number(document.getElementById("ef-utility-pos").value) || 0;
+
+    const utilityNeg =
+        Number(document.getElementById("ef-utility-neg").value) || 0;
+
+    const selectedSwatch =
+        document.querySelector("#ef-color-swatches .color-swatch.selected");
+
+    const color =
+        selectedSwatch ? selectedSwatch.dataset.color : "yellow";
+
+    if (!category || !name || !price || price <= 0) {
+
+        return;
+
+    }
+
+    const items =
+        loadEconomyItems();
+
+    items.push({
+        category: category,
+        name: name,
+        price: price,
+        discount: discount,
+        utilityPos: utilityPos,
+        utilityNeg: utilityNeg,
+        color: color
+    });
+
+    saveEconomyItems(items);
+
+    renderEconomyItems();
+
+    event.target.reset();
+
+    document.getElementById("ef-discount").value = 0;
+    document.getElementById("ef-utility-pos").value = 0;
+    document.getElementById("ef-utility-neg").value = 0;
+
+}
+
+
+function deleteEconomyItem(index) {
+
+    const items =
+        loadEconomyItems();
+
+    items.splice(index, 1);
+
+    saveEconomyItems(items);
+
+    renderEconomyItems();
+
+}
+
 
 
 
