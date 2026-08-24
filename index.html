@@ -869,6 +869,79 @@ header {
     background: #333;
 }
 
+
+/* =========================================================
+   BALANCE
+========================================================= */
+
+.balance-hero {
+    background: #fafaf8;
+
+    border: 1px solid #e8e8e4;
+
+    border-radius: 18px;
+
+    padding: 26px 24px;
+
+    text-align: center;
+
+    margin-bottom: 12px;
+}
+
+.balance-hero-label {
+    font-size: 13px;
+
+    color: #888;
+
+    margin-bottom: 8px;
+}
+
+.balance-hero-amount {
+    font-size: clamp(28px, 7vw, 40px);
+
+    font-weight: 700;
+
+    letter-spacing: -1.2px;
+}
+
+.balance-hero-updated {
+    margin-top: 8px;
+
+    font-size: 12px;
+
+    color: #aaa;
+}
+
+.balance-history {
+    margin-top: 14px;
+}
+
+.balance-history-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    padding: 10px 2px;
+
+    border-bottom: 1px solid #eeeeea;
+
+    font-size: 13px;
+}
+
+.balance-history-row:last-child {
+    border-bottom: none;
+}
+
+.balance-history-date {
+    color: #999;
+}
+
+.balance-history-amount {
+    font-weight: 600;
+}
+
 .economy-card {
     position: relative;
 }
@@ -1690,6 +1763,145 @@ footer {
             </form>
 
         </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =======================================================
+     ACCOUNT BALANCE
+======================================================= -->
+
+<section class="category">
+
+    <button
+        class="category-toggle"
+        onclick="toggleCategory(this)"
+    >
+
+        <div class="category-left">
+
+            <span class="category-icon">
+                🏦
+            </span>
+
+            <span class="category-name">
+                계좌 잔액
+            </span>
+
+        </div>
+
+        <span class="category-arrow">
+            ▼
+        </span>
+
+    </button>
+
+
+    <div class="category-content">
+
+        <div class="balance-hero">
+
+            <div class="balance-hero-label">
+                총 사용 가능 금액
+            </div>
+
+            <div
+                class="balance-hero-amount"
+                id="balanceTotalAmount"
+            >
+                0원
+            </div>
+
+            <div
+                class="balance-hero-updated"
+                id="balanceTotalUpdated"
+            >
+                아직 저장 기록 없음
+            </div>
+
+        </div>
+
+
+        <button
+            class="economy-add-toggle"
+            onclick="toggleAddForm(this)"
+        >
+
+            <span>
+                금액 입력하기
+            </span>
+
+            <span class="weekly-arrow">
+                ▼
+            </span>
+
+        </button>
+
+
+        <div class="economy-form-wrap">
+
+            <form
+                class="economy-form"
+                onsubmit="handleSaveBalances(event)"
+            >
+
+                <div class="form-grid">
+
+                    <div class="form-field full">
+                        <label>카카오뱅크 (원)</label>
+                        <input
+                            type="number"
+                            id="bal-kakao"
+                            placeholder="0"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field full">
+                        <label>우리신세대저축예금 (원)</label>
+                        <input
+                            type="number"
+                            id="bal-woori_new"
+                            placeholder="0"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-field full">
+                        <label>우리저축예금 (원)</label>
+                        <input
+                            type="number"
+                            id="bal-woori_saving"
+                            placeholder="0"
+                            min="0"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+
+                <button
+                    type="submit"
+                    class="form-submit"
+                >
+                    저장하기
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <div
+            class="balance-history"
+            id="balanceHistoryList"
+        ></div>
 
     </div>
 
@@ -3195,6 +3407,278 @@ function renderEconomyItems() {
 
 
 renderEconomyItems();
+
+
+
+/* =========================================================
+   ACCOUNT BALANCE
+========================================================= */
+
+const BALANCE_ACCOUNTS = [
+    { id: "kakao", name: "카카오뱅크" },
+    { id: "woori_new", name: "우리신세대저축예금" },
+    { id: "woori_saving", name: "우리저축예금" }
+];
+
+const BALANCE_KEY =
+    "sanhoAccountBalances";
+
+const BALANCE_HISTORY_KEY =
+    "sanhoBalanceHistory";
+
+
+function loadAccountBalances() {
+
+    const raw =
+        localStorage.getItem(BALANCE_KEY);
+
+    if (!raw) {
+
+        return {
+            kakao: 0,
+            woori_new: 0,
+            woori_saving: 0
+        };
+
+    }
+
+    try {
+
+        return JSON.parse(raw);
+
+    } catch (e) {
+
+        return {
+            kakao: 0,
+            woori_new: 0,
+            woori_saving: 0
+        };
+
+    }
+
+}
+
+
+function saveAccountBalances(balances) {
+
+    localStorage.setItem(
+        BALANCE_KEY,
+        JSON.stringify(balances)
+    );
+
+}
+
+
+function loadBalanceHistory() {
+
+    const raw =
+        localStorage.getItem(BALANCE_HISTORY_KEY);
+
+    if (!raw) {
+
+        return [];
+
+    }
+
+    try {
+
+        return JSON.parse(raw);
+
+    } catch (e) {
+
+        return [];
+
+    }
+
+}
+
+
+function saveBalanceHistory(history) {
+
+    localStorage.setItem(
+        BALANCE_HISTORY_KEY,
+        JSON.stringify(history)
+    );
+
+}
+
+
+function formatWon(amount) {
+
+    return Number(amount).toLocaleString("ko-KR") + "원";
+
+}
+
+
+function formatBalanceDate(iso) {
+
+    const d = new Date(iso);
+
+    const pad = function(n) {
+        return String(n).padStart(2, "0");
+    };
+
+    return d.getFullYear() + "."
+        + pad(d.getMonth() + 1) + "."
+        + pad(d.getDate()) + " "
+        + pad(d.getHours()) + ":"
+        + pad(d.getMinutes());
+
+}
+
+
+function renderBalanceSection() {
+
+    const balances =
+        loadAccountBalances();
+
+    const history =
+        loadBalanceHistory();
+
+    const total =
+        BALANCE_ACCOUNTS.reduce(function(sum, acc) {
+
+            return sum + Number(balances[acc.id] || 0);
+
+        }, 0);
+
+
+    document.getElementById(
+        "balanceTotalAmount"
+    ).textContent = formatWon(total);
+
+
+    const latest =
+        history[history.length - 1];
+
+    document.getElementById(
+        "balanceTotalUpdated"
+    ).textContent = latest
+        ? "마지막 저장: " + formatBalanceDate(latest.date)
+        : "아직 저장 기록 없음";
+
+
+    BALANCE_ACCOUNTS.forEach(function(acc) {
+
+        const input =
+            document.getElementById("bal-" + acc.id);
+
+        if (input && document.activeElement !== input) {
+
+            input.value = balances[acc.id] || "";
+
+        }
+
+    });
+
+
+    const historyContainer =
+        document.getElementById("balanceHistoryList");
+
+    if (history.length <= 1) {
+
+        historyContainer.innerHTML = "";
+        return;
+
+    }
+
+    const recent =
+        history.slice(-5).reverse();
+
+    historyContainer.innerHTML =
+        recent.map(function(h) {
+
+            return `
+
+                <div class="balance-history-row">
+                    <span class="balance-history-date">
+                        ${formatBalanceDate(h.date)}
+                    </span>
+                    <span class="balance-history-amount">
+                        ${formatWon(h.amount)}
+                    </span>
+                </div>
+
+            `;
+
+        }).join("");
+
+}
+
+
+function handleSaveBalances(event) {
+
+    event.preventDefault();
+
+    const balances = {};
+
+    let valid = true;
+
+    BALANCE_ACCOUNTS.forEach(function(acc) {
+
+        const raw =
+            document.getElementById("bal-" + acc.id).value;
+
+        if (raw === "" || isNaN(Number(raw))) {
+
+            valid = false;
+
+        }
+
+        balances[acc.id] = Number(raw || 0);
+
+    });
+
+    if (!valid) {
+
+        alert("모든 계좌에 숫자를 입력해주세요.");
+        return;
+
+    }
+
+    saveAccountBalances(balances);
+
+    const total =
+        BALANCE_ACCOUNTS.reduce(function(sum, acc) {
+
+            return sum + balances[acc.id];
+
+        }, 0);
+
+    const history =
+        loadBalanceHistory();
+
+    history.push({
+        amount: total,
+        date: new Date().toISOString()
+    });
+
+    saveBalanceHistory(history);
+
+    renderBalanceSection();
+
+    const wrap =
+        event.target.closest(".economy-form-wrap");
+
+    if (wrap) {
+
+        wrap.classList.remove("open");
+
+        const toggleBtn =
+            wrap.previousElementSibling;
+
+        if (toggleBtn) {
+
+            toggleBtn.classList.remove("open");
+
+        }
+
+    }
+
+}
+
+
+renderBalanceSection();
 
 
 
