@@ -2,231 +2,139 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>행위-수치(numbered value) 연결기록</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>기초 명사 · 6개 언어</title>
 <style>
-    * {
-        box-sizing: border-box;
-    }
-
-    body {
-        margin: 0;
-        background: #f5f5f2;
-        color: #202020;
-        font-family:
-            -apple-system,
-            BlinkMacSystemFont,
-            "Segoe UI",
-            "Noto Sans KR",
-            sans-serif;
-    }
-
-    .container {
-        width: min(920px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 48px 0;
-    }
-
-    h1 {
-        margin: 0 0 28px;
-        font-size: clamp(24px, 5vw, 36px);
-        font-weight: 700;
-        letter-spacing: -1px;
-    }
-
-    /* ---------- TAB ---------- */
-
-    .tabs {
-        display: flex;
-        gap: 8px;
-        border-bottom: 1px solid #e5e5e1;
-    }
-
-    .tab {
-        border: none;
-        background: transparent;
-        padding: 12px 18px;
-        font-family: inherit;
-        font-size: 15px;
-        font-weight: 600;
-        color: #202020;
-        border-bottom: 2px solid #202020;
-        margin-bottom: -1px;
-        cursor: default;
-    }
-
-    /* ---------- PANEL ---------- */
-
-    .panel {
-        padding: 28px 0;
-    }
-
-    .caption {
-        font-size: 13px;
-        color: #888;
-        line-height: 1.7;
-        margin: 0 0 24px;
-    }
-
-    /* ---------- NODE ---------- */
-
-    .ref-node {
-        background: white;
-        border: 1px solid #e5e5e1;
-        border-radius: 18px;
-        padding: 22px 24px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 16px;
-        flex-wrap: wrap;
-    }
-
-    .ref-name {
-        font-size: 22px;
-        font-weight: 700;
-        letter-spacing: -0.8px;
-    }
-
-    .ref-sub {
-        margin-top: 4px;
-        font-size: 13px;
-        color: #888;
-    }
-
-    .ref-value {
-        font-size: 36px;
-        font-weight: 700;
-        letter-spacing: -1px;
-        color: #bdbdb6;
-    }
-
-    .ref-value.set {
-        color: #202020;
-    }
-
-    .ref-value small {
-        font-size: 16px;
-        font-weight: 600;
-        letter-spacing: -0.3px;
-        margin-left: 4px;
-        color: #888;
-    }
-
-    /* ---------- SECTION ---------- */
-
-    .bill-section {
-        margin-top: 28px;
-    }
-
-    .section-label {
-        font-size: 12px;
-        color: #999;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        margin-bottom: 12px;
-    }
-
-    .stack {
-        display: flex;
-        flex-direction: column;
-        gap: 14px;
-    }
-
-    /* ---------- RESPONSIVE ---------- */
-
-    @media (max-width: 480px) {
-        .container {
-            padding: 32px 0;
-        }
-
-        .ref-node {
-            padding: 18px;
-        }
-
-        .ref-value {
-            font-size: 30px;
-        }
-    }
+:root{--bg:#f7f5f0;--card:#fff;--fg:#222;--sub:#888;--line:#eee;--ex:#fafafa;--accent:#222;--onacc:#fff;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1b1b1d;--card:#26262a;--fg:#eee;--sub:#9a9a9f;--line:#38383d;--ex:#2e2e33;--accent:#eee;--onacc:#1b1b1d}}
+:root[data-theme="dark"]{--bg:#1b1b1d;--card:#26262a;--fg:#eee;--sub:#9a9a9f;--line:#38383d;--ex:#2e2e33;--accent:#eee;--onacc:#1b1b1d}
+*{box-sizing:border-box}
+body{margin:0;padding:24px 16px 40px;background:var(--bg);color:var(--fg);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Noto Sans KR",sans-serif}
+header{max-width:560px;margin:0 auto 12px;text-align:center}
+h1{font-size:21px;margin:0 0 6px}
+header p{margin:0;color:var(--sub);font-size:13px}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;display:flex;gap:8px;overflow-x:auto;max-width:560px;margin:0 auto 14px;padding:8px 2px;background:var(--bg)}
+.tab{flex:0 0 auto;border:1px solid var(--line);background:var(--card);color:var(--fg);font-size:14px;padding:8px 16px;border-radius:999px;cursor:pointer}
+.tab.on{background:var(--accent);color:var(--onacc);border-color:var(--accent)}
+.bar{max-width:560px;margin:0 auto 14px;text-align:center}
+.re{border:none;background:var(--accent);color:var(--onacc);font-size:14px;padding:10px 20px;border-radius:999px;cursor:pointer}
+#list{display:flex;gap:16px;overflow-x:auto;scroll-snap-type:x mandatory;padding:6px 6px 20px;max-width:900px;margin:0 auto;-webkit-overflow-scrolling:touch}
+.card{flex:0 0 auto;scroll-snap-align:start;width:min(88vw,520px);background:var(--card);border-radius:20px;padding:24px;box-shadow:0 8px 28px rgba(0,0,0,.08)}
+.pos{display:inline-block;padding:4px 10px;border-radius:8px;background:var(--line);font-size:13px;margin-bottom:12px}
+.wl{display:flex;align-items:baseline;flex-wrap:wrap;gap:4px 12px}
+.w{font-size:32px;font-weight:700;overflow-wrap:anywhere}
+.rd{font-size:16px;color:var(--sub)}
+.ph{margin:6px 0 14px;font-size:15px;color:var(--sub)}
+.ph div{display:flex;gap:8px}
+.ph i{font-style:normal;font-size:11px;min-width:34px;opacity:.7;align-self:center}
+.spk{border:1px solid var(--line);background:transparent;color:var(--fg);border-radius:999px;font-size:13px;padding:7px 16px;cursor:pointer;margin-bottom:14px}
+.lab{display:block;font-size:12px;color:var(--sub);margin-bottom:6px}
+.mean{font-size:19px;margin:0;padding-top:14px;border-top:1px solid var(--line)}
+.ex{border-left:4px solid var(--accent);padding:10px 16px;margin-top:16px;background:var(--ex);border-radius:0 8px 8px 0}
+.ex .t{font-size:17px;margin-bottom:5px;line-height:2.4}
+.ex .t rt{font-size:13px;color:var(--sub);user-select:none}
+.ex .k{color:var(--sub);font-size:15px}
 </style>
 </head>
-
 <body>
-<div class="container">
-
-    <h1>행위-수치(numbered value) 연결기록</h1>
-
-    <div class="tabs" role="tablist">
-        <button
-            class="tab active"
-            id="up-reference-tab"
-            role="tab"
-            aria-selected="true"
-            aria-controls="up-reference"
-        >
-            업레퍼런스
-        </button>
-    </div>
-
-    <main
-        class="panel"
-        id="up-reference"
-        role="tabpanel"
-        aria-labelledby="up-reference-tab"
-    >
-
-        <p class="caption">
-            제어입력의 레퍼런스. 행위는 적지 않고, 수치만 둔다.
-        </p>
-
-        <!-- 목의 각도 -->
-
-        <div class="ref-node">
-            <div>
-                <div class="ref-name">목의 각도</div>
-                <div class="ref-sub">구부정해 보이나, 펴 보이나</div>
-            </div>
-
-            <div class="ref-value">—</div>
-        </div>
-
-        <!-- 빌 에타 -->
-
-        <section class="bill-section">
-
-            <div class="section-label">NUMBERED VALUE / 01</div>
-
-            <div class="ref-node">
-                <div>
-                    <div class="ref-name">빌 에타 - 1</div>
-                    <div class="ref-sub">행위-수치 연결기록</div>
-                </div>
-
-                <div class="ref-value">1</div>
-            </div>
-
-        </section>
-
-        <!-- mimi-hangul-french.com 목표치 -->
-
-        <section class="bill-section">
-
-            <div class="section-label">NUMBERED VALUE / 02 · 목표치</div>
-
-            <div class="ref-node">
-                <div>
-                    <div class="ref-name">유입인구</div>
-                    <div class="ref-sub">mimi-hangul-french.com · Google Analytics</div>
-                </div>
-
-                <div class="ref-value set">30<small>명</small> · 1<small>분 내외</small></div>
-            </div>
-
-        </section>
-
-    </main>
-
-</div>
+<header><h1>기초 명사 · 6개 언어</h1><p>옆으로 넘기며 확인 · 무작위 10개</p></header>
+<div class="tabs" id="tabs"></div>
+<div class="bar"><button class="re" id="re">🔄 새 단어 보기</button></div>
+<div id="list"></div>
+<script>
+// 일본어: [단어, 읽기, 뜻, IPA, 한글, 예문(루비), 예문 번역] (원본 그대로)
+const JA=[
+["家族","かぞく","가족","kazokɯ","","<ruby>私<rt>わたし</rt></ruby>の<ruby>家族<rt>かぞく</rt></ruby>は<ruby>四人<rt>よにん</rt></ruby>です。","우리 가족은 네 명이다."],
+["父","ちち","아버지","tɕitɕi","","<ruby>父<rt>ちち</rt></ruby>は<ruby>毎朝<rt>まいあさ</rt></ruby><ruby>新聞<rt>しんぶん</rt></ruby>を<ruby>読<rt>よ</rt></ruby>みます。","아버지는 매일 아침 신문을 읽으신다."],
+["母","はは","어머니","haha","","<ruby>母<rt>はは</rt></ruby>は<ruby>料理<rt>りょうり</rt></ruby>が<ruby>上手<rt>じょうず</rt></ruby>です。","어머니는 요리를 잘하신다."],
+["友達","ともだち","친구","tomodatɕi","","<ruby>友達<rt>ともだち</rt></ruby>と<ruby>映画<rt>えいが</rt></ruby>を<ruby>見<rt>み</rt></ruby>に<ruby>行<rt>い</rt></ruby>きました。","친구와 영화를 보러 갔다."],
+["先生","せんせい","선생님","seɴsei","","<ruby>先生<rt>せんせい</rt></ruby>はとても<ruby>親切<rt>しんせつ</rt></ruby>です。","선생님은 매우 친절하시다."],
+["犬","いぬ","개","inɯ","","<ruby>犬<rt>いぬ</rt></ruby>が<ruby>公園<rt>こうえん</rt></ruby>を<ruby>走<rt>はし</rt></ruby>っています。","개가 공원을 뛰어다니고 있다."],
+["猫","ねこ","고양이","neko","","<ruby>猫<rt>ねこ</rt></ruby>は<ruby>窓<rt>まど</rt></ruby>の<ruby>近<rt>ちか</rt></ruby>くで<ruby>寝<rt>ね</rt></ruby>ています。","고양이는 창가에서 자고 있다."],
+["雨","あめ","비","ame","","<ruby>明日<rt>あした</rt></ruby>は<ruby>雨<rt>あめ</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>るでしょう。","내일은 비가 올 것이다."],
+["水","みず","물","mizɯ","","<ruby>喉<rt>のど</rt></ruby>が<ruby>渇<rt>かわ</rt></ruby>いたので<ruby>水<rt>みず</rt></ruby>を<ruby>飲<rt>の</rt></ruby>みました。","목이 말라서 물을 마셨다."],
+["本","ほん","책","hoɴ","","<ruby>図書館<rt>としょかん</rt></ruby>で<ruby>本<rt>ほん</rt></ruby>を<ruby>借<rt>か</rt></ruby>りました。","도서관에서 책을 빌렸다."],
+["学校","がっこう","학교","gakkoɯ","","<ruby>毎日<rt>まいにち</rt></ruby><ruby>学校<rt>がっこう</rt></ruby>へ<ruby>行<rt>い</rt></ruby>きます。","매일 학교에 간다."],
+["病院","びょういん","병원","boɯiɴ","","<ruby>昨日<rt>きのう</rt></ruby>、<ruby>病院<rt>びょういん</rt></ruby>に<ruby>行<rt>い</rt></ruby>きました。","어제 병원에 갔다."],
+["駅","えき","역","eki","","<ruby>駅<rt>えき</rt></ruby>で<ruby>友達<rt>ともだち</rt></ruby>を<ruby>待<rt>ま</rt></ruby>ちます。","역에서 친구를 기다린다."],
+["車","くるま","자동차","kɯɾɯma","","<ruby>車<rt>くるま</rt></ruby>で<ruby>会社<rt>かいしゃ</rt></ruby>に<ruby>行<rt>い</rt></ruby>きます。","자동차로 회사에 간다."],
+["朝","あさ","아침","asa","","<ruby>毎朝<rt>まいあさ</rt></ruby><ruby>六時<rt>ろくじ</rt></ruby>に<ruby>起<rt>お</rt></ruby>きます。","매일 아침 6시에 일어난다."],
+["兄","あに","형(오빠)","ani","","<ruby>兄<rt>あに</rt></ruby>は<ruby>大学生<rt>だいがくせい</rt></ruby>です。","형(오빠)은 대학생이다."],
+["姉","あね","누나(언니)","ane","","<ruby>姉<rt>あね</rt></ruby>は<ruby>看護師<rt>かんごし</rt></ruby>です。","누나(언니)는 간호사다."],
+["弟","おとうと","남동생","otoɯto","","<ruby>弟<rt>おとうと</rt></ruby>はまだ<ruby>小学生<rt>しょうがくせい</rt></ruby>です。","남동생은 아직 초등학생이다."],
+["妹","いもうと","여동생","imoɯto","","<ruby>妹<rt>いもうと</rt></ruby>は<ruby>毎日<rt>まいにち</rt></ruby>ピアノを<ruby>練習<rt>れんしゅう</rt></ruby>します。","여동생은 매일 피아노를 연습한다."],
+["祖父","そふ","할아버지","soɸɯ","","<ruby>祖父<rt>そふ</rt></ruby>は<ruby>庭<rt>にわ</rt></ruby>で<ruby>花<rt>はな</rt></ruby>を<ruby>育<rt>そだ</rt></ruby>てています。","할아버지는 정원에서 꽃을 기르신다."],
+["祖母","そぼ","할머니","sobo","","<ruby>祖母<rt>そぼ</rt></ruby>は<ruby>毎週<rt>まいしゅう</rt></ruby><ruby>手紙<rt>てがみ</rt></ruby>をくれます。","할머니는 매주 편지를 보내주신다."],
+["息子","むすこ","아들","mɯsɯko","","<ruby>息子<rt>むすこ</rt></ruby>は<ruby>来年<rt>らいねん</rt></ruby><ruby>高校<rt>こうこう</rt></ruby>に<ruby>入<rt>はい</rt></ruby>ります。","아들은 내년에 고등학교에 들어간다."],
+["娘","むすめ","딸","mɯsɯme","","<ruby>娘<rt>むすめ</rt></ruby>は<ruby>絵<rt>え</rt></ruby>を<ruby>描<rt>えが</rt></ruby>くのが<ruby>好<rt>す</rt></ruby>きです。","딸은 그림 그리는 것을 좋아한다."],
+["学生","がくせい","학생","gakɯsei","","<ruby>学生<rt>がくせい</rt></ruby>は<ruby>毎日<rt>まいにち</rt></ruby><ruby>図書館<rt>としょかん</rt></ruby>で<ruby>勉強<rt>べんきょう</rt></ruby>します。","학생은 매일 도서관에서 공부한다."],
+["鳥","とり","새","toɾi","","<ruby>鳥<rt>とり</rt></ruby>が<ruby>木<rt>き</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>で<ruby>鳴<rt>な</rt></ruby>いています。","새가 나무 위에서 울고 있다."],
+["魚","さかな","물고기","sakana","","<ruby>川<rt>かわ</rt></ruby>で<ruby>魚<rt>さかな</rt></ruby>を<ruby>釣<rt>つ</rt></ruby>りました。","강에서 물고기를 낚았다."],
+["馬","うま","말","ɯma","","<ruby>馬<rt>うま</rt></ruby>が<ruby>牧場<rt>ぼくじょう</rt></ruby>を<ruby>走<rt>はし</rt></ruby>っています。","말이 목장을 달리고 있다."],
+["牛","うし","소","ɯɕi","","<ruby>牛<rt>うし</rt></ruby>が<ruby>草<rt>くさ</rt></ruby>を<ruby>食<rt>た</rt></ruby>べています。","소가 풀을 먹고 있다."],
+["豚","ぶた","돼지","bɯta","","<ruby>農場<rt>のうじょう</rt></ruby>に<ruby>豚<rt>ぶた</rt></ruby>がたくさんいます。","농장에 돼지가 많이 있다."],
+["うさぎ","うさぎ","토끼","ɯsagi","","うさぎは<ruby>耳<rt>みみ</rt></ruby>が<ruby>長<rt>なが</rt></ruby>いです。","토끼는 귀가 길다."],
+["ねずみ","ねずみ","쥐","nezɯmi","","<ruby>台所<rt>だいどころ</rt></ruby>にねずみが<ruby>出<rt>で</rt></ruby>ました。","부엌에 쥐가 나타났다."],
+["空","そら","하늘","soɾa","","<ruby>空<rt>そら</rt></ruby>はとても<ruby>青<rt>あお</rt></ruby>いです。","하늘이 매우 파랗다."],
+["雲","くも","구름","kɯmo","","<ruby>白<rt>しろ</rt></ruby>い<ruby>雲<rt>くも</rt></ruby>が<ruby>浮<rt>う</rt></ruby>かんでいます。","하얀 구름이 떠 있다."],
+["雪","ゆき","눈(雪)","jɯki","","<ruby>冬<rt>ふゆ</rt></ruby>になると<ruby>雪<rt>ゆき</rt></ruby>が<ruby>降<rt>ふ</rt></ruby>ります。","겨울이 되면 눈이 내린다."],
+["風","かぜ","바람","kaze","","<ruby>今日<rt>きょう</rt></ruby>は<ruby>風<rt>かぜ</rt></ruby>が<ruby>強<rt>つよ</rt></ruby>いです。","오늘은 바람이 강하다."],
+["太陽","たいよう","태양","taijoɯ","","<ruby>太陽<rt>たいよう</rt></ruby>が<ruby>東<rt>ひがし</rt></ruby>から<ruby>昇<rt>のぼ</rt></ruby>ります。","태양은 동쪽에서 뜬다."],
+["月","つき","달","tsɯki","","<ruby>夜空<rt>よぞら</rt></ruby>に<ruby>丸<rt>まる</rt></ruby>い<ruby>月<rt>つき</rt></ruby>が<ruby>見<rt>み</rt></ruby>えます。","밤하늘에 둥근 달이 보인다."],
+["星","ほし","별","hoɕi","","<ruby>山<rt>やま</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>で<ruby>星<rt>ほし</rt></ruby>がよく<ruby>見<rt>み</rt></ruby>えます。","산 위에서는 별이 잘 보인다."],
+["山","やま","산","jama","","<ruby>週末<rt>しゅうまつ</rt></ruby>に<ruby>山<rt>やま</rt></ruby>に<ruby>登<rt>のぼ</rt></ruby>ります。","주말에 산에 오른다."],
+["川","かわ","강","kawa","","<ruby>子供<rt>こども</rt></ruby>たちが<ruby>川<rt>かわ</rt></ruby>で<ruby>遊<rt>あそ</rt></ruby>んでいます。","아이들이 강에서 놀고 있다."],
+["海","うみ","바다","ɯmi","","<ruby>夏<rt>なつ</rt></ruby>には<ruby>海<rt>うみ</rt></ruby>に<ruby>行<rt>い</rt></ruby>きたいです。","여름에는 바다에 가고 싶다."],
+["木","き","나무","ki","","<ruby>庭<rt>にわ</rt></ruby>に<ruby>大<rt>おお</rt></ruby>きな<ruby>木<rt>き</rt></ruby>があります。","정원에 큰 나무가 있다."],
+["花","はな","꽃","hana","","<ruby>公園<rt>こうえん</rt></ruby>にきれいな<ruby>花<rt>はな</rt></ruby>が<ruby>咲<rt>さ</rt></ruby>いています。","공원에 예쁜 꽃이 피어 있다."],
+["火","ひ","불","çi","","キャンプで<ruby>火<rt>ひ</rt></ruby>をおこしました。","캠핑에서 불을 피웠다."],
+["土","つち","흙","tsɯtɕi","","<ruby>雨<rt>あめ</rt></ruby>の<ruby>後<rt>あと</rt></ruby>、<ruby>土<rt>つち</rt></ruby>が<ruby>柔<rt>やわ</rt></ruby>らかくなりました。","비가 온 후 흙이 부드러워졌다."],
+["家","いえ","집","ie","","<ruby>新<rt>あたら</rt></ruby>しい<ruby>家<rt>いえ</rt></ruby>に<ruby>引<rt>ひ</rt></ruby>っ<ruby>越<rt>こ</rt></ruby>しました。","새 집으로 이사했다."],
+["部屋","へや","방","heja","","<ruby>私<rt>わたし</rt></ruby>の<ruby>部屋<rt>へや</rt></ruby>は<ruby>二階<rt>にかい</rt></ruby>にあります。","내 방은 2층에 있다."],
+["窓","まど","창문","mado","","<ruby>窓<rt>まど</rt></ruby>を<ruby>開<rt>あ</rt></ruby>けて<ruby>空気<rt>くうき</rt></ruby>を<ruby>入<rt>い</rt></ruby>れました。","창문을 열어 공기를 넣었다."],
+["机","つくえ","책상","tsɯkɯe","","<ruby>机<rt>つくえ</rt></ruby>の<ruby>上<rt>うえ</rt></ruby>に<ruby>本<rt>ほん</rt></ruby>があります。","책상 위에 책이 있다."],
+["椅子","いす","의자","isɯ","","<ruby>椅子<rt>いす</rt></ruby>に<ruby>座<rt>すわ</rt></ruby>って<ruby>休<rt>やす</rt></ruby>みました。","의자에 앉아 쉬었다."],
+["台所","だいどころ","부엌","daidokoɾo","","<ruby>母<rt>はは</rt></ruby>は<ruby>台所<rt>だいどころ</rt></ruby>で<ruby>料理<rt>りょうり</rt></ruby>をしています。","어머니는 부엌에서 요리를 하고 계신다."],
+["風呂","ふろ","욕실(목욕)","ɸɯɾo","","<ruby>寝<rt>ね</rt></ruby>る<ruby>前<rt>まえ</rt></ruby>にお<ruby>風呂<rt>ふろ</rt></ruby>に<ruby>入<rt>はい</rt></ruby>ります。","자기 전에 목욕을 한다."],
+["庭","にわ","정원","niwa","","<ruby>庭<rt>にわ</rt></ruby>で<ruby>野菜<rt>やさい</rt></ruby>を<ruby>育<rt>そだ</rt></ruby>てています。","정원에서 채소를 기르고 있다."],
+["鍵","かぎ","열쇠","kagi","","<ruby>鍵<rt>かぎ</rt></ruby>をなくしてしまいました。","열쇠를 잃어버리고 말았다."],
+["時計","とけい","시계","tokei","","<ruby>壁<rt>かべ</rt></ruby>に<ruby>大<rt>おお</rt></ruby>きな<ruby>時計<rt>とけい</rt></ruby>があります。","벽에 큰 시계가 있다."]
+];
+// 그 외: "단어|읽기/병음|한글|뜻|예문|번역" (읽기 없으면 빈칸)
+const D={
+en:"family||ˈfæməli|가족|I have a big family.|나는 대가족이다.\nwater||ˈwɔːtɚ|물|Please drink more water.|물을 더 마셔 주세요.\nbook||bʊk|책|This book is very interesting.|이 책은 매우 재미있다.\nschool||skuːl|학교|I walk to school every day.|나는 매일 걸어서 학교에 간다.\nfriend||frɛnd|친구|She is my best friend.|그녀는 내 가장 친한 친구다.\nrain||reɪn|비|The rain stopped this morning.|오늘 아침에 비가 그쳤다.\nmorning||ˈmɔːrnɪŋ|아침|I drink coffee in the morning.|나는 아침에 커피를 마신다.\nhouse||haʊs|집|Their house has a small garden.|그들의 집에는 작은 정원이 있다.\ncar||kɑːr|자동차|My father bought a new car.|아버지가 새 차를 사셨다.\nhospital||ˈhɑːspɪtl̩|병원|The hospital is near the station.|병원은 역 근처에 있다.",
+zh:"家庭|jiātíng|tɕja⁵⁵ tʰiŋ³⁵|가족|我的家庭很幸福。|우리 가족은 매우 행복하다.\n水|shuǐ|ʂweɪ²¹⁴|물|请给我一杯水。|물 한 잔 주세요.\n书|shū|ʂu⁵⁵|책|这本书很有意思。|이 책은 매우 재미있다.\n学校|xuéxiào|ɕɥe³⁵ ɕjɑʊ⁵¹|학교|我每天去学校。|나는 매일 학교에 간다.\n朋友|péngyou|pʰɤŋ³⁵ joʊ²¹⁴|친구|他是我的朋友。|그는 내 친구다.\n雨|yǔ|y²¹⁴|비|今天下雨了。|오늘 비가 왔다.\n早上|zǎoshang|tsɑʊ²¹⁴ ʂɑŋ|아침|我早上六点起床。|나는 아침 6시에 일어난다.\n房子|fángzi|fɑŋ³⁵ tsɨ|집|这个房子很大。|이 집은 크다.\n汽车|qìchē|tɕʰi⁵¹ ʈʂʰɤ⁵⁵|자동차|他开汽车上班。|그는 자동차로 출근한다.\n医院|yīyuàn|i⁵⁵ ɥɛn⁵¹|병원|医院在车站旁边。|병원은 역 옆에 있다.",
+de:"die Familie||faˈmiːli̯ə|가족|Meine Familie wohnt in Berlin.|우리 가족은 베를린에 산다.\ndas Wasser||ˈvasɐ|물|Ich trinke gern Wasser.|나는 물 마시는 것을 좋아한다.\ndas Buch||buːx|책|Das Buch liegt auf dem Tisch.|책이 탁자 위에 있다.\ndie Schule||ˈʃuːlə|학교|Die Schule beginnt um acht Uhr.|학교는 8시에 시작한다.\nder Freund||fʁɔʏ̯nt|친구|Mein Freund kommt morgen.|내 친구가 내일 온다.\nder Regen||ˈʁeːɡn̩|비|Der Regen hört bald auf.|비가 곧 그친다.\nder Morgen||ˈmɔʁɡn̩|아침|Am Morgen trinke ich Tee.|아침에 나는 차를 마신다.\ndas Haus||haʊ̯s|집|Das Haus ist sehr alt.|그 집은 매우 오래되었다.\ndas Auto||ˈaʊ̯to|자동차|Das Auto ist neu.|그 자동차는 새것이다.\ndas Krankenhaus||ˈkʁaŋkn̩haʊ̯s|병원|Das Krankenhaus ist groß.|그 병원은 크다.",
+vi:"gia đình||zaː˧˧ ɗiŋ˨˩|가족|Gia đình tôi có bốn người.|우리 가족은 네 명이다.\nnước||nɨək̚˧˥|물|Tôi uống nước mỗi ngày.|나는 매일 물을 마신다.\nsách||sajk̚˧˥|책|Cuốn sách này rất hay.|이 책은 매우 재미있다.\ntrường học||ʈɨəŋ˨˩ hɔk̚˨|학교|Tôi đến trường học mỗi ngày.|나는 매일 학교에 간다.\nbạn||ɓaːn˨|친구|Bạn tôi rất tốt bụng.|내 친구는 매우 착하다.\nmưa||mɨə˧˧|비|Hôm nay trời mưa.|오늘은 비가 온다.\nbuổi sáng||ɓuəj˧˩ saːŋ˧˥|아침|Buổi sáng tôi uống cà phê.|아침에 나는 커피를 마신다.\nnhà||ɲaː˨˩|집|Nhà tôi ở gần biển.|우리 집은 바다 근처에 있다.\nô tô||ʔo˧˧ to˧˧|자동차|Bố tôi mua một chiếc ô tô mới.|아버지가 새 자동차를 사셨다.\nbệnh viện||ɓɛɲ˨ viən˨|병원|Bệnh viện ở gần ga.|병원은 역 근처에 있다.",
+mn:"гэр бүл||ɡɛr pʊɬ|가족|Манай гэр бүл дөрвөн хүнтэй.|우리 가족은 네 명이다.\nус||ʊs|물|Би өдөр бүр ус уудаг.|나는 매일 물을 마신다.\nном||nɔm|책|Энэ ном маш сонирхолтой.|이 책은 매우 재미있다.\nсургууль||sʊrɡuːɬ|학교|Би өдөр бүр сургуульд явдаг.|나는 매일 학교에 간다.\nнайз||naɪt͡s|친구|Миний найз сайхан сэтгэлтэй.|내 친구는 마음이 따뜻하다.\nбороо||pɔrɔː|비|Өнөөдөр бороо орж байна.|오늘은 비가 오고 있다.\nөглөө||ɵɡɬɵː|아침|Би өглөө кофе уудаг.|나는 아침에 커피를 마신다.\nбайшин||paɪʃɪŋ|집|Энэ байшин маш хуучин.|이 집은 매우 오래되었다.\nмашин||maʃɪŋ|자동차|Аав шинэ машин авсан.|아버지가 새 자동차를 샀다.\nэмнэлэг||ɛmnɛɬɛɡ|병원|Эмнэлэг буудлын ойролцоо байдаг.|병원은 역 근처에 있다."
+};
+const LG=[["ja","🇯🇵 일본어","ja-JP"],["en","🇬🇧 영어","en-US"],["zh","🇨🇳 중국어","zh-CN"],["de","🇩🇪 독일어","de-DE"],["vi","🇻🇳 베트남어","vi-VN"],["mn","🇲🇳 몽골어","mn-MN"]];
+const DB={ja:JA.map(a=>({w:a[0],r:a[1],m:a[2],ipa:a[3],ko:a[4],exh:a[5],ek:a[6],say:a[1],html:1}))};
+for(const k in D)DB[k]=D[k].split("\n").map(l=>{const a=l.split("|");return{w:a[0],r:a[1],ipa:a[2],m:a[3],ex:a[4],ek:a[5],say:a[4]}});
+let cur="ja";const $=id=>document.getElementById(id);
+function speak(t,l){try{if(!("speechSynthesis" in window))return;const u=new SpeechSynthesisUtterance(t);u.lang=l;speechSynthesis.cancel();speechSynthesis.speak(u)}catch(e){}}
+function tabs(){$("tabs").innerHTML="";LG.forEach(g=>{const b=document.createElement("button");b.className="tab"+(g[0]===cur?" on":"");b.textContent=g[1];b.onclick=()=>{cur=g[0];tabs();render()};$("tabs").appendChild(b)})}
+function render(){
+  const lang=LG.find(g=>g[0]===cur)[2],arr=DB[cur].slice();
+  for(let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]]}
+  $("list").innerHTML="";
+  arr.slice(0,10).forEach(e=>{
+    const c=document.createElement("div");c.className="card";
+    c.innerHTML='<div class="pos">명사</div><div class="wl"><span class="w"></span><span class="rd"></span></div><div class="ph"></div><button class="spk">🔊 발음 듣기</button><span class="lab">뜻</span><p class="mean"></p><div class="ex"><div class="t"></div><div class="k"></div></div>';
+    c.querySelector(".w").textContent=e.w;
+    const hasR=e.r&&cur==="ja";
+    if(e.r)c.querySelector(".rd").textContent=hasR?"("+e.r+")":e.r;
+    const ph=c.querySelector(".ph");
+    if(e.ipa){const d=document.createElement("div");d.innerHTML="<i>IPA</i><span></span>";d.lastChild.textContent="/"+e.ipa+"/";ph.appendChild(d)}
+    c.querySelector(".mean").textContent=e.m;
+    if(e.html)c.querySelector(".t").innerHTML=e.exh;else c.querySelector(".t").textContent=e.ex;
+    c.querySelector(".k").textContent=e.ek;
+    c.querySelector(".spk").onclick=()=>speak(e.say,lang);
+    $("list").appendChild(c);
+  });
+  $("list").scrollTo({left:0});
+}
+$("re").onclick=render;tabs();render();
+</script>
 </body>
 </html>
